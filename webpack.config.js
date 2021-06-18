@@ -16,7 +16,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
   },
-  entry: './src/index.js',
+  entry: './src/client/index.tsx',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
@@ -35,6 +35,10 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.[jt]sx?$/,
+        use: ['ts-loader'],
+      },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],

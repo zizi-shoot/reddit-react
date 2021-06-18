@@ -19,14 +19,22 @@
   },
   "homepage": "https://github.com/zizi-shoot/reddit-react#readme",
   "devDependencies": {
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.7",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
+    "react-dom": "^17.0.2",
     "style-loader": "^2.0.0",
+    "ts-loader": "^8.3.0",
+    "typescript": "^4.3.4",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.8.0"
+  },
+  "dependencies": {
+    "react": "^17.0.2"
   }
 }
