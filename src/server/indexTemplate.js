@@ -6,7 +6,6 @@ const indexTemplate = (content) => `
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <title>myReddit</title>
-  <link rel="stylesheet" href="/static/main.css">
   <script defer src="/static/client.js"></script>
 </head>
 <body>

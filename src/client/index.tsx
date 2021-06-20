@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
-import Header from '../shared/Header';
-import './main.scss';
+import { App } from '../App';
 
-ReactDOM.hydrate(<Header />, document.getElementById('app'));
+window.addEventListener('load', () => {
+  ReactDOM.hydrate(<App />, document.getElementById('app'));
+});

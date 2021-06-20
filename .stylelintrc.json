@@ -2,5 +2,8 @@
   "extends": "stylelint-config-sass-guidelines",
   "plugins": [
     "stylelint-scss"
-  ]
+  ],
+  "rules": {
+    "order/properties-alphabetical-order": false
+  }
 }

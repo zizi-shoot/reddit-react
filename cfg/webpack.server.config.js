@@ -1,13 +1,13 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const { NODE_ENV } = process.env;
+const GLOBAL_CSS_REGEXP = /\.global\.scss$/;
 
 module.exports = {
   target: 'node',
-  mode: NODE_ENV ? NODE_ENV : 'development',
+  mode: NODE_ENV || 'development',
   resolve: {
     extensions: ['.js', '.json', '.ts', '.tsx'],
   },
@@ -19,7 +19,6 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
   ],
   watchOptions: {
     ignored: /dist/,
@@ -34,11 +33,15 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               sourceMap: true,
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+                exportOnlyLocals: true,
+              },
             },
           },
           {
@@ -47,6 +50,14 @@ module.exports = {
               sourceMap: true,
             },
           },
+        ],
+        exclude: GLOBAL_CSS_REGEXP,
+      },
+      {
+        test: GLOBAL_CSS_REGEXP,
+        use: [
+          'css-loader',
+          'scss-loader',
         ],
       },
       {
