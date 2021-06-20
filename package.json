@@ -6,7 +6,7 @@
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server"
+    "dev": "cross-env NODE_ENV=development node ./bin/dev.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/zizi-shoot/reddit-react#readme",
   "devDependencies": {
+    "@hot-loader/react-dom": "^17.0.1",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
@@ -28,12 +29,15 @@
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.6.0",
     "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.3.0",
     "typescript": "^4.3.4",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^5.0.0",
     "webpack-dev-server": "^3.8.0",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {

@@ -1,4 +1,5 @@
 const path = require('path');
+const { HotModuleReplacementPlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -15,16 +16,29 @@ module.exports = {
   mode: NODE_ENV ? NODE_ENV : 'development',
   resolve: {
     extensions: ['.js', '.json', '.ts', '.tsx'],
+    alias: {
+      'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom',
+    },
   },
-  entry: path.resolve(__dirname, '../src/client/index.tsx'),
+  entry: [
+    path.resolve(__dirname, '../src/client/index.tsx'),
+    'webpack-hot-middleware/client?path=http://localhost:3001/static/__webpack_hmr',
+  ],
   output: {
     path: path.resolve(__dirname, '../dist/client'),
     filename: 'client.js',
+    publicPath: '/static/',
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
-  ],
+  plugins: IS_DEV
+    ? [
+      new MiniCssExtractPlugin(),
+      new HotModuleReplacementPlugin(),
+      new CleanWebpackPlugin(),
+    ]
+    : [new MiniCssExtractPlugin()],
+  watchOptions: {
+    ignored: /dist/,
+  },
   module: {
     rules: [
       {
@@ -46,5 +60,6 @@ module.exports = {
     ],
   },
   devtool: setupDevtool(),
+
 };
 

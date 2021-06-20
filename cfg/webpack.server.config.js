@@ -21,6 +21,9 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
   ],
+  watchOptions: {
+    ignored: /dist/,
+  },
   externals: [nodeExternals()],
   module: {
     rules: [
