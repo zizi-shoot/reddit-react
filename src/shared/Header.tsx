@@ -1,5 +1,4 @@
 import React from 'react';
-import './Header.css';
 import { hot } from 'react-hot-loader/root';
 
 const HeaderComponent = () => (

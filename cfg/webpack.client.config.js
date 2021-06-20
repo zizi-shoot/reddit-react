@@ -2,13 +2,14 @@ const path = require('path');
 const { HotModuleReplacementPlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const { NODE_ENV } = process.env;
 const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
 
 function setupDevtool() {
-  if (IS_DEV) return 'eval';
+  if (IS_DEV) return 'inline-source-map';
   if (IS_PROD) return false;
 }
 
@@ -46,8 +47,22 @@ module.exports = {
         use: ['ts-loader'],
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -60,6 +75,9 @@ module.exports = {
     ],
   },
   devtool: setupDevtool(),
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
+  },
 
 };
 
