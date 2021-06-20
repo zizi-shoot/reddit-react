@@ -1,4 +1,4 @@
-export const indexTemplate = (content) => `
+const indexTemplate = (content) => `
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -14,3 +14,5 @@ export const indexTemplate = (content) => `
 </body>
 </html>
 `;
+
+export default indexTemplate;

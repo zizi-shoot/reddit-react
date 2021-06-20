@@ -1,7 +1,7 @@
 import express from 'express';
 import ReactDOM from 'react-dom/server';
-import { Header } from '../shared/Header';
-import { indexTemplate } from './indexTemplate';
+import Header from '../shared/Header.tsx';
+import indexTemplate from './indexTemplate';
 
 const app = express();
 
@@ -14,5 +14,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(3000, () => {
+  // eslint-disable-next-line no-console
   console.log('Server started on http://localhost:3000');
 });
