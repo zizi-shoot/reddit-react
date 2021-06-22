@@ -1,11 +1,11 @@
 const path = require('path');
 const { HotModuleReplacementPlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MinCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { NODE_ENV } = process.env;
 const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
-const GLOBAL_CSS_REGEXP = /\.global\.scss$/;
 
 function setupDevtool() {
   if (IS_DEV) return 'inline-source-map';
@@ -32,6 +32,7 @@ module.exports = {
   plugins: IS_DEV
     ? [
       new HotModuleReplacementPlugin(),
+      new MinCssExtractPlugin(),
       new CleanWebpackPlugin(),
     ]
     : [],
@@ -47,32 +48,14 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: {
-                mode: 'local',
-                localIdentName: '[local]',
-              },
-            },
-          },
+          MinCssExtractPlugin.loader,
+          'css-loader',
           {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
             },
           },
-        ],
-        exclude: GLOBAL_CSS_REGEXP,
-      },
-      {
-        test: GLOBAL_CSS_REGEXP,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
         ],
       },
       {

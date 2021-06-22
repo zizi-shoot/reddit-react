@@ -5,6 +5,17 @@
   ],
   "rules": {
     "order/properties-alphabetical-order": false,
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "max-nesting-depth": [
+      2,
+      {
+        "ignoreAtRules": [
+          "each",
+          "media",
+          "supports",
+          "include"
+        ]
+      }
+    ]
   }
 }

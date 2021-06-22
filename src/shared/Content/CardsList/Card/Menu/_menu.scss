@@ -1,0 +1,47 @@
+.menu {
+  position: absolute;
+  top: 17px;
+  right: 15px;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 31px;
+    height: 31px;
+    border: 0;
+    border-radius: 31px;
+    background: transparent;
+    transform: rotate(90deg);
+
+    &:active,
+    &:hover {
+      background-color: rgba(51, 51, 51, 0.1);
+    }
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .menu__btn {
+    align-self: center;
+    transform: unset;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .menu {
+    position: static;
+    flex: 0 0;
+    align-self: center;
+    order: 3;
+    margin: 0 0 0 auto;
+
+    &__btn {
+      position: relative;
+
+      &:hover {
+        background-color: rgba(51, 51, 51, 0.1);
+      }
+    }
+  }
+}

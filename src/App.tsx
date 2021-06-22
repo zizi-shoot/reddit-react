@@ -1,6 +1,6 @@
 import React from 'react';
+import './main.scss';
 import { hot } from 'react-hot-loader/root';
-import './main.global.scss';
 import { Layout } from './shared/Layout';
 import { Header } from './shared/Header';
 import { Content } from './shared/Content';
