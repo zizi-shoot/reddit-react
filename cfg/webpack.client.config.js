@@ -54,7 +54,7 @@ module.exports = {
               sourceMap: true,
               modules: {
                 mode: 'local',
-                localIdentName: '[name]__[local]--[hash:base64:5]',
+                localIdentName: '[local]',
               },
             },
           },
@@ -70,8 +70,9 @@ module.exports = {
       {
         test: GLOBAL_CSS_REGEXP,
         use: [
+          'style-loader',
           'css-loader',
-          'scss-loader',
+          'sass-loader',
         ],
       },
       {

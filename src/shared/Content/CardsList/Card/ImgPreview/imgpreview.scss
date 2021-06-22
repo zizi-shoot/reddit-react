@@ -1,0 +1,21 @@
+.preview {
+  max-height: 178px;
+
+  &__img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .preview {
+    order: 1;
+    max-width: 190px;
+    max-height: 107px;
+
+    &__img {
+      border-radius: 3px;
+    }
+  }
+}

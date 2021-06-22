@@ -39,7 +39,7 @@ module.exports = {
               sourceMap: true,
               modules: {
                 mode: 'local',
-                localIdentName: '[name]__[local]--[hash:base64:5]',
+                localIdentName: '[local]',
                 exportOnlyLocals: true,
               },
             },
@@ -57,16 +57,22 @@ module.exports = {
         test: GLOBAL_CSS_REGEXP,
         use: [
           'css-loader',
-          'scss-loader',
+          'sass-loader',
         ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: ['file-loader'],
+        loader: 'file-loader',
+        options: {
+          publicPath: '/static',
+        },
       },
       {
         test: /\.(woff|woff2)$/i,
-        use: ['file-loader'],
+        loader: 'file-loader',
+        options: {
+          publicPath: '/static',
+        },
       },
     ],
   },

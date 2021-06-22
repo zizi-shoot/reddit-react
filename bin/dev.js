@@ -13,7 +13,7 @@ hmrServer.use(webpackDevMiddleware(clientCompiler, {
   serverSideRender: true,
   writeToDisk: true,
   stats: 'errors-only',
-  headers: (req, res, context) => {
+  headers: (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
   },
 }));

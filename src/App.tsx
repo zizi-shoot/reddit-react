@@ -1,9 +1,30 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
-import { Component } from './Component';
+import './main.global.scss';
+import { Layout } from './shared/Layout';
+import { Header } from './shared/Header';
+import { Content } from './shared/Content';
+import { CardsList } from './shared/Content/CardsList';
+import { Card } from './shared/Content/CardsList/Card';
+import { ImgPreview } from './shared/Content/CardsList/Card/ImgPreview';
+import { Menu } from './shared/Content/CardsList/Card/Menu';
+import { TextContent } from './shared/Content/CardsList/Card/TextContent';
+import { Controls } from './shared/Content/CardsList/Card/Controls';
 
-const AppComp = () => (
-  <Component />
+const AppComponent = () => (
+  <Layout>
+    <Header />
+    <Content>
+      <CardsList>
+        <Card>
+          <TextContent />
+          <ImgPreview />
+          <Menu />
+          <Controls />
+        </Card>
+      </CardsList>
+    </Content>
+  </Layout>
 );
 
-export const App = hot(AppComp);
+export const App = hot(AppComponent);

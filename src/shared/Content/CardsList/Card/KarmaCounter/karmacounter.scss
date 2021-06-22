@@ -1,0 +1,36 @@
+.karmaCounter > * + * {
+  padding: 0 0 0 4px;
+}
+
+.karmaValue {
+  color: var(--greyC4);
+}
+
+@media all and (min-width: 1024px) {
+  .karmaCounter {
+    text-align: center;
+  }
+  .karmaCounter > * + * {
+    padding: 7px 0 0;
+  }
+  .up {
+    margin-bottom: 4px;
+  }
+  .karmaValue {
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--black);
+  }
+}
+
+@media all and (min-width: 1524px) {
+  .karmaCounter {
+    .up:hover svg path {
+      fill: var(--green);
+    }
+
+    .down:hover svg path {
+      fill: var(--orange);
+    }
+  }
+}
