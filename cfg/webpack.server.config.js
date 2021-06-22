@@ -3,7 +3,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const { NODE_ENV } = process.env;
-const GLOBAL_CSS_REGEXP = /\.global\.scss$/;
 
 module.exports = {
   target: 'node',
@@ -33,31 +32,13 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: {
-                mode: 'local',
-                localIdentName: '[local]',
-                exportOnlyLocals: true,
-              },
-            },
-          },
+          'css-loader',
           {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
             },
           },
-        ],
-        exclude: GLOBAL_CSS_REGEXP,
-      },
-      {
-        test: GLOBAL_CSS_REGEXP,
-        use: [
-          'css-loader',
-          'sass-loader',
         ],
       },
       {

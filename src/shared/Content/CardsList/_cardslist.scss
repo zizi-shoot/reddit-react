@@ -1,5 +1,7 @@
 @media all and (min-width: 1024px) {
-  .cardsList {
+  .cards {
     padding: 40px 0;
   }
 }
+
+@import './Card/card';
