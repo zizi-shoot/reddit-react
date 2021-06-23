@@ -4,8 +4,10 @@ interface IContentProps {
   children?: React.ReactNode;
 }
 
-export const Content = ({ children }: IContentProps) => (
-  <main className="content">
-    {children}
-  </main>
-);
+export function Content({ children }: IContentProps) {
+  return (
+    <main className="content">
+      {children}
+    </main>
+  );
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 
-export const Title = () => (
-  <h1 className="header__title">Header</h1>
-);
+export function Title() {
+  return (
+    <h1 className="header__title">Header</h1>
+  );
+}

@@ -3,10 +3,12 @@ import { Search } from './Search';
 import { Title } from './Title';
 import { Sort } from './Sort';
 
-export const Header = () => (
-  <header className="header">
-    <Search />
-    <Title />
-    <Sort />
-  </header>
-);
+export function Header() {
+  return (
+    <header className="header">
+      <Search />
+      <Title />
+      <Sort />
+    </header>
+  );
+}

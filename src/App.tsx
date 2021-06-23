@@ -11,20 +11,22 @@ import { Menu } from './shared/Content/CardsList/Card/Menu';
 import { TextContent } from './shared/Content/CardsList/Card/TextContent';
 import { Controls } from './shared/Content/CardsList/Card/Controls';
 
-const AppComponent = () => (
-  <Layout>
-    <Header />
-    <Content>
-      <CardsList>
-        <Card>
-          <TextContent />
-          <ImgPreview />
-          <Menu />
-          <Controls />
-        </Card>
-      </CardsList>
-    </Content>
-  </Layout>
-);
+function AppComponent() {
+  return (
+    <Layout>
+      <Header />
+      <Content>
+        <CardsList>
+          <Card>
+            <TextContent />
+            <ImgPreview />
+            <Menu />
+            <Controls />
+          </Card>
+        </CardsList>
+      </Content>
+    </Layout>
+  );
+}
 
 export const App = hot(AppComponent);

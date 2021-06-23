@@ -4,8 +4,10 @@ interface ICardProps {
   children?: React.ReactNode;
 }
 
-export const Card = ({ children }: ICardProps) => (
-  <li className="card">
-    {children}
-  </li>
-);
+export function Card({ children }: ICardProps) {
+  return (
+    <li className="card">
+      {children}
+    </li>
+  );
+}

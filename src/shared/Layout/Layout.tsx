@@ -4,8 +4,10 @@ interface ILayoutProps {
   children?: React.ReactNode;
 }
 
-export const Layout = ({ children }: ILayoutProps) => (
-  <div className="container">
-    {children}
-  </div>
-);
+export function Layout({ children }: ILayoutProps) {
+  return (
+    <div className="container">
+      {children}
+    </div>
+  );
+}
