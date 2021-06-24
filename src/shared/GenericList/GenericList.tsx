@@ -1,3 +1,4 @@
+import React, { ReactNode } from 'react';
 import { noop } from '../../utils/js/noop';
 
 interface IItem {
@@ -7,13 +8,14 @@ interface IItem {
   className?: string
   As?: 'a' | 'li' | 'button' | 'div';
   href?: string,
+  icon?: ReactNode,
 }
 
 interface IGenericListProps {
   list: IItem[];
 }
 
-export function MyList({ list }: IGenericListProps) {
+export function GenericList({ list }: IGenericListProps) {
   return (
     <>
       {list.map(({
@@ -23,6 +25,7 @@ export function MyList({ list }: IGenericListProps) {
         className,
         id,
         href,
+        icon,
       }) => (
         <As
           className={className}
@@ -30,6 +33,7 @@ export function MyList({ list }: IGenericListProps) {
           key={id}
           href={href}
         >
+          {icon}
           {text}
         </As>
       ))}

@@ -9,14 +9,22 @@ interface IDropdownProps {
   onClose?: () => void;
 }
 
-export function Dropdown({ button, children, isOpen, onOpen = noop, onClose = noop }: IDropdownProps) {
+export function Dropdown(props: IDropdownProps) {
+  const {
+    button,
+    children,
+    isOpen,
+    onOpen = noop,
+    onClose = noop,
+  } = props;
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
 
   useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
-  useEffect(() => isDropdownOpen ? onOpen() : onClose(), [isDropdownOpen]);
+  useEffect(() => (isDropdownOpen ? onOpen() : onClose()), [isDropdownOpen]);
 
   const handleOpen = () => {
-    if (isOpen === undefined) {
+    if (!isOpen) {
       setIsDropdownOpen(!isDropdownOpen);
     }
   };

@@ -5,6 +5,10 @@
   border-radius: 7px;
   background-color: var(--white);
 
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
   > * {
     flex: 1 1 100%;
   }
@@ -35,5 +39,6 @@
 @import './Controls/controls';
 @import './ImgPreview/imgpreview';
 @import './KarmaCounter/karmacounter';
+@import './MenuButton/menubutton';
 @import './Menu/menu';
 @import './TextContent/textcontent';

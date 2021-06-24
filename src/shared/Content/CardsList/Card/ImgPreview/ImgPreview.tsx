@@ -1,11 +1,14 @@
 import React from 'react';
-import img from './img-preview.jpg';
 
-export function ImgPreview() {
+interface IImgPreviewProps {
+  imgPreview: string,
+}
+
+export function ImgPreview({ imgPreview }: IImgPreviewProps) {
   return (
     <div className="card__preview preview">
       <img
-        src={img}
+        src={imgPreview}
         alt="preview"
         className="preview__img"
       />
