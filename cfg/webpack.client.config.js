@@ -27,15 +27,18 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist/client'),
     filename: 'client.js',
-    publicPath: '/static/',
+    publicPath: 'static/',
   },
   plugins: IS_DEV
     ? [
+      new CleanWebpackPlugin(),
       new HotModuleReplacementPlugin(),
       new MinCssExtractPlugin(),
-      new CleanWebpackPlugin(),
     ]
-    : [],
+    : [
+      new CleanWebpackPlugin(),
+      new MinCssExtractPlugin(),
+    ],
   watchOptions: {
     ignored: /dist/,
   },
@@ -60,11 +63,11 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: ['file-loader'],
+        type: 'asset/resource',
       },
       {
         test: /\.(woff|woff2)$/i,
-        use: ['file-loader'],
+        type: 'asset/resource',
       },
     ],
   },

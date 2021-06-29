@@ -14,6 +14,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist/server'),
     filename: 'server.js',
+    publicPath: 'static/',
   },
 
   plugins: [
@@ -43,17 +44,12 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        loader: 'file-loader',
-        options: {
-          publicPath: '/static',
-        },
+        type: 'asset/resource',
+
       },
       {
         test: /\.(woff|woff2)$/i,
-        loader: 'file-loader',
-        options: {
-          publicPath: '/static',
-        },
+        type: 'asset/resource',
       },
     ],
   },
