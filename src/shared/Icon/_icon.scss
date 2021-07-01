@@ -1,0 +1,96 @@
+.icon {
+  line-height: 0;
+
+  &--s12 > svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  &--s14 > svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &--s16 > svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &--s20 > svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media all and (min-width: 320px) and (max-width: 1023px) {
+  .icon {
+    &--m12 > svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    &--m14 > svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    &--m16 > svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &--m20 > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+@media all and (min-width: 1024px) and (max-width: 1539px) {
+  .icon {
+    &--t12 > svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    &--t14 > svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    &--t16 > svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &--t20 > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+@media all and (min-width: 1540px) {
+  .icon {
+    &--d12 > svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    &--d14 > svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    &--d16 > svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &--d20 > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+

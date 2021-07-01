@@ -2,14 +2,39 @@ import React, { useState } from 'react';
 import { merge } from '../../../../../utils/js/merge';
 import { GenericList } from '../../../../GenericList/GenericList';
 import { generateId } from '../../../../../utils/react/generateRandomIndex';
-import { CommentsIcon, ComplainIcon, HideIcon, SaveIcon, ShareIcon } from '../../../../Icons';
+import { EIcons, Icon } from '../../../../Icon';
 
 const ITEMS = [
-  { As: 'li' as const, className: 'menu__item menu__item--desktop', text: 'Комментарии', icon: CommentsIcon() },
-  { As: 'li' as const, className: 'menu__item menu__item--desktop', text: 'Поделиться', icon: ShareIcon() },
-  { As: 'li' as const, className: 'menu__item', text: 'Скрыть', icon: HideIcon() },
-  { As: 'li' as const, className: 'menu__item menu__item--desktop', text: 'Сохранить', icon: SaveIcon() },
-  { As: 'li' as const, className: 'menu__item', text: 'Пожаловаться', icon: ComplainIcon() },
+  {
+    As: 'li' as const,
+    className: 'menu__item menu__item--desktop',
+    text: 'Комментарии',
+    icon: Icon({ name: EIcons.comments, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: 'menu__item menu__item--desktop',
+    text: 'Поделиться',
+    icon: Icon({ name: EIcons.share, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: 'menu__item',
+    text: 'Скрыть',
+    icon: Icon({ name: EIcons.hide, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: 'menu__item menu__item--desktop',
+    text: 'Сохранить',
+    icon: Icon({ name: EIcons.save, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: 'menu__item',
+    text: 'Пожаловаться',
+    icon: Icon({ name: EIcons.complain, size: 16, mobileSize: 14 }),
+  },
 ].map(generateId);
 
 export function Menu() {

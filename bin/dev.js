@@ -33,13 +33,13 @@ compiler.run((err) => {
     console.log('Compilation failed: ', err);
   }
 
-  // compiler.watch({}, (err) => {
-  //   if (err) {
-  //     console.log('Compilation failed: ', err);
-  //   }
-  //
-  //   console.log('Compilation was successfully');
-  // });
+  compiler.watch({}, (err) => {
+    if (err) {
+      console.log('Compilation failed: ', err);
+    }
+
+    console.log('Compilation was successfully');
+  });
 
   nodemon({
     script: path.resolve(__dirname, '../dist/server/server.js'),

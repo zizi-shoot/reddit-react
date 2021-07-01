@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown } from '../../../../Dropdown';
 import { Menu } from '../Menu';
-import { MenuIcon } from '../../../../Icons';
+import { EIcons, Icon } from '../../../../Icon';
 
 export function MenuButton() {
   return (
@@ -9,7 +9,7 @@ export function MenuButton() {
       <Dropdown
         button={(
           <button type="button" className="card-menu-btn__btn">
-            <MenuIcon />
+            <Icon name={EIcons.menu} size={20} />
           </button>
         )}
       >
