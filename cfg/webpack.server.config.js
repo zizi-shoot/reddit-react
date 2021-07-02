@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const { DefinePlugin } = require('webpack');
 
 const { NODE_ENV } = process.env;
 
@@ -19,6 +20,7 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
+    new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` }),
   ],
   watchOptions: {
     ignored: /dist/,
@@ -28,7 +30,15 @@ module.exports = {
     rules: [
       {
         test: /\.[jt]sx?$/,
-        use: ['ts-loader'],
+        // use: ['ts-loader'],
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
       },
       {
         test: /\.scss$/,

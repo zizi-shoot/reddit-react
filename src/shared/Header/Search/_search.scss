@@ -3,17 +3,15 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  margin: 0 0 38px;
-  padding: 14px 20px;
-  border-radius: 0 0 7px 7px;
-  background-color: var(--white);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 8px 16px;
+  border-radius: 30px;
+  background-color: var(--greyF4);
+  flex: 1;
+  font-size: 12px;
 }
 
 @media all and (min-width: 1024px) {
   .header__search {
-    order: 3;
-    margin: 0 0 0 auto;
     padding: 0;
     border-radius: 0;
     background-color: transparent;

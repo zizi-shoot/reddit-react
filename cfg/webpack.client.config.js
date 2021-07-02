@@ -1,7 +1,10 @@
 const path = require('path');
-const { HotModuleReplacementPlugin } = require('webpack');
+const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MinCssExtractPlugin = require('mini-css-extract-plugin');
+
+const DEV_PLUGINS = [new HotModuleReplacementPlugin()];
+const COMMON_PLUGINS = [new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` }), new CleanWebpackPlugin(), new MinCssExtractPlugin()];
 
 const { NODE_ENV } = process.env;
 const IS_DEV = NODE_ENV === 'development';
@@ -29,16 +32,7 @@ module.exports = {
     filename: 'client.js',
     publicPath: 'static/',
   },
-  plugins: IS_DEV
-    ? [
-      new CleanWebpackPlugin(),
-      new HotModuleReplacementPlugin(),
-      new MinCssExtractPlugin(),
-    ]
-    : [
-      new CleanWebpackPlugin(),
-      new MinCssExtractPlugin(),
-    ],
+  plugins: IS_DEV ? [...DEV_PLUGINS, ...COMMON_PLUGINS] : COMMON_PLUGINS,
   watchOptions: {
     ignored: /dist/,
   },
@@ -46,7 +40,15 @@ module.exports = {
     rules: [
       {
         test: /\.[jt]sx?$/,
-        use: ['ts-loader'],
+        // use: ['ts-loader'],
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
       },
       {
         test: /\.scss$/,

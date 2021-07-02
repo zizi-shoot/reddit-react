@@ -6,3 +6,4 @@ export * from './ShareIcon';
 export * from './MenuIcon';
 export * from './KarmaUpIcon';
 export * from './KarmaDownIcon';
+export * from './AnonIcon';

@@ -12,6 +12,12 @@ app.get('/', (req, res) => {
     indexTemplate(ReactDOM.renderToString(App())),
   );
 });
+app.get('/auth', (req, res) => {
+  // req.query.code;
+  res.send(
+    indexTemplate(ReactDOM.renderToString(App())),
+  );
+});
 
 app.listen(3000, () => {
   // eslint-disable-next-line no-console

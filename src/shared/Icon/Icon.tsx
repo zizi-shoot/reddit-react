@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import classNames from 'classnames';
-import { CommentsIcon, ComplainIcon, HideIcon, KarmaDownIcon, KarmaUpIcon, MenuIcon, SaveIcon, ShareIcon } from '../Icons';
+import { AnonIcon, CommentsIcon, ComplainIcon, HideIcon, KarmaDownIcon, KarmaUpIcon, MenuIcon, SaveIcon, ShareIcon } from '../Icons';
 
 export enum EIcons {
   comments,
@@ -11,9 +11,10 @@ export enum EIcons {
   share,
   karmaUp,
   karmaDown,
+  anon,
 }
 
-type TSizes = 12 | 14 | 16 | 20;
+type TSizes = 12 | 14 | 16 | 20 | 30 | 50;
 
 interface IIconProps {
   name: EIcons,
@@ -42,6 +43,8 @@ function setIconComponent(name: EIcons): ReactNode {
       return <KarmaUpIcon />;
     case EIcons.karmaDown:
       return <KarmaDownIcon />;
+    case EIcons.anon:
+      return <AnonIcon />;
     default:
       return <></>;
   }
