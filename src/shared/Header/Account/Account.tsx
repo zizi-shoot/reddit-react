@@ -15,7 +15,7 @@ export function Account({ avatarSrc, username }: IAccountProps) {
     >
       {
         avatarSrc
-          ? (<img src={avatarSrc} alt="user avatar" className="account__avatar" />)
+          ? (<span className="account__avatar"><img src={avatarSrc.replaceAll('amp;', '')} alt="user avatar" /></span>)
           : (<Icon name={EIcons.anon} size={50} mobileSize={30} />)
       }
       <span className="account__name">

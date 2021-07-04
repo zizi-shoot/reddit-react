@@ -1,4 +1,4 @@
-const indexTemplate = (content) => `
+const indexTemplate = (content, token) => `
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,6 +8,9 @@ const indexTemplate = (content) => `
   <title>myReddit</title>
   <link rel="stylesheet" href="/static/main.css">
   <script defer src="/static/client.js"></script>
+  <script>
+    window.__token__ = '${token}'
+  </script>
 </head>
 <body>
   <div id="app">${content}</div>
