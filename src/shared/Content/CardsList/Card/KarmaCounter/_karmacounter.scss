@@ -6,6 +6,8 @@
   }
 
   &__value {
+    vertical-align: top;
+    line-height: 23px;
     color: var(--greyC4);
   }
 }

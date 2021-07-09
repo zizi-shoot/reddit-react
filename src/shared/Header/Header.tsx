@@ -6,12 +6,8 @@ import { Sort } from './Sort';
 import { Account } from './Account';
 import { useUserData } from '../../hooks/useUserData';
 
-interface IHeaderProps {
-  token: string;
-}
-
-export function Header({ token }: IHeaderProps) {
-  const [data] = useUserData(token);
+export function Header() {
+  const [data] = useUserData();
 
   return (
     <header className="header">

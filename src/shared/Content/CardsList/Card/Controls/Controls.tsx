@@ -1,10 +1,13 @@
 import React from 'react';
-import { KarmaCounter } from '../KarmaCounter';
 
-export function Controls() {
+interface IControlProps {
+  children?: React.ReactNode;
+}
+
+export function Controls({ children }: IControlProps) {
   return (
     <div className="card__controls controls">
-      <KarmaCounter />
+      {children}
       <button className="controls__comments-btn" type="button">
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

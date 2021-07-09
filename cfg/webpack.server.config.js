@@ -30,15 +30,8 @@ module.exports = {
     rules: [
       {
         test: /\.[jt]sx?$/,
-        // use: ['ts-loader'],
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-            },
-          },
-        ],
+        use: ['ts-loader'],
+
       },
       {
         test: /\.scss$/,
@@ -53,7 +46,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
         type: 'asset/resource',
 
       },
