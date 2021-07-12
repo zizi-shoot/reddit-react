@@ -1,11 +1,11 @@
 import React from 'react';
-import { usePostsData } from '../../hooks/usePostsData';
+import { TImgPreview, usePostsData } from '../../hooks/usePostsData';
 
 interface IPostsContextData {
   id: string,
   author: string,
   title: string,
-  imgPreview?: any,
+  imgPreview: TImgPreview,
   created: string,
   score: number,
 }

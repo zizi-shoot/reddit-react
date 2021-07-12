@@ -2,13 +2,23 @@ import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { tokenContext } from '../shared/context';
 
+export type TImgPreview = Array<string> | undefined;
+
 interface IPostsData {
   id: string,
   author: string,
   title: string,
-  imgPreview?: any,
+  imgPreview: TImgPreview,
   created: string,
   score: number,
+}
+
+interface IResolutionItems {
+  [N: string]: string | number;
+}
+
+interface IPost {
+  [N: string]: any;
 }
 
 export function usePostsData() {
@@ -24,26 +34,19 @@ export function usePostsData() {
       .then((resp) => {
         const postsData = resp.data.data.children;
 
-        setData(postsData.map((
-          {
-            data:
-              {
-                id,
-                author,
-                title,
-                created,
-                score,
-                preview: imgPreview = '',
-              },
-          }: any,
-        ) => ({
-          id,
-          author,
-          title,
-          imgPreview,
-          created,
-          score,
-        })));
+        setData(postsData.map(({ data: post }: IPost) => {
+          const { id, author, title, created, score } = post;
+          const imgPreview = post.preview?.images[0].resolutions
+            .map((item: IResolutionItems) => item.url);
+          return {
+            id,
+            author,
+            title,
+            created,
+            score,
+            imgPreview,
+          };
+        }));
       })
       .catch(console.log);
   }, [token]);

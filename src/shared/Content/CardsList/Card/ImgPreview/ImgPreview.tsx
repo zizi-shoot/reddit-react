@@ -1,9 +1,15 @@
 import React from 'react';
 import Placeholder from './placeholder.jpg';
 
-export function ImgPreview({ imgPreview }: any) {
-  const smallImg = imgPreview?.images?.[0]?.resolutions?.[0]?.url;
-  const bigImg = imgPreview?.images?.[0]?.resolutions?.[4]?.url;
+interface IImgPreviewProps {
+  imgPreview: Array<string> | undefined;
+}
+
+export function ImgPreview({ imgPreview }: IImgPreviewProps) {
+  // eslint-disable-next-line react/destructuring-assignment
+  const smallImg = imgPreview?.shift();
+  // eslint-disable-next-line react/destructuring-assignment
+  const bigImg = imgPreview?.pop();
 
   return (
     <div className="card__preview preview">
