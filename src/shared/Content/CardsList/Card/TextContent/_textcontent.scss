@@ -50,11 +50,14 @@
   font-size: 16px;
   line-height: 19px;
 
-  &__link {
+  &__btn {
     display: box;
     overflow: hidden;
     -webkit-line-clamp: 2;
     box-orient: vertical;
+    text-align: left;
+    font-size: 16px;
+    line-height: 19px;
   }
 }
 
@@ -89,6 +92,11 @@
     padding: 0;
     font-size: 20px;
     line-height: 23px;
+
+    &__btn {
+      font-size: 20px;
+      line-height: 23px;
+    }
   }
 }
 
@@ -108,7 +116,7 @@
     }
   }
 
-  .text-title__link::after {
+  .text-title__btn::after {
     content: '';
     position: absolute;
     top: 0;

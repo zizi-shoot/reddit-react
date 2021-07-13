@@ -23,11 +23,11 @@ export function Dropdown(props: IDropdownProps) {
   useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
   useEffect(() => (isDropdownOpen ? onOpen() : onClose()), [isDropdownOpen]);
 
-  const handleOpen = () => {
+  function handleOpen() {
     if (!isOpen) {
       setIsDropdownOpen(!isDropdownOpen);
     }
-  };
+  }
 
   return (
     <div className="dropdown">

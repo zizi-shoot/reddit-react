@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
 :root {
   --black: #333;
@@ -12,6 +12,7 @@
   --grey66: #666;
   --grey99: #999;
   --greyEC: #ececec;
+  --greyE5: #e5e5e5;
 }
 
 body {
@@ -21,6 +22,7 @@ body {
   font-size: 14px;
   line-height: 16px;
   background-color: var(--greyF4);
+  position: relative;
 }
 
 * {

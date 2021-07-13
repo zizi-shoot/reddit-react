@@ -1,0 +1,40 @@
+.comment-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border-radius: 3px;
+
+  &__area {
+    width: 100%;
+    resize: none;
+    grid-column: 1/-1;
+    min-height: 90px;
+    border-color: var(--greyD9);
+    font-family: 'Roboto', serif;
+    padding: 16px;
+  }
+
+  &__submit-btn {
+    padding: 17px 50px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--white);
+    background-color: var(--orange);
+    grid-column: 2/-1;
+
+    @media (any-hover: hover) {
+      &:hover {
+        filter: brightness(1.1);
+      }
+    }
+
+    &:active {
+      filter: brightness(0.9);
+    }
+  }
+
+  &__actions {
+    background-color: var(--greyE5);
+    grid-column: 1/2;
+  }
+}
