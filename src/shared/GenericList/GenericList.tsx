@@ -9,6 +9,7 @@ interface IItem {
   As?: 'a' | 'li' | 'button' | 'div';
   href?: string,
   icon?: ReactNode,
+  component?: ReactNode,
 }
 
 interface IGenericListProps {
@@ -26,6 +27,7 @@ export function GenericList({ list }: IGenericListProps) {
         id,
         href,
         icon,
+        component
       }) => (
         <As
           className={className}
@@ -35,6 +37,7 @@ export function GenericList({ list }: IGenericListProps) {
         >
           {icon}
           {text}
+          {component}
         </As>
       ))}
     </>

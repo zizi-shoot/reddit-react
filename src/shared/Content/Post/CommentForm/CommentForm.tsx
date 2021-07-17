@@ -1,10 +1,11 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useContext } from 'react';
+import { commentContext } from '../../../context/commentContext';
 
 export function CommentForm() {
-  const [value, setValue] = useState('');
+  const { value, onChange } = useContext(commentContext);
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setValue(event.target.value);
+    onChange(event.target.value);
   }
 
   function handleSubmit(event: FormEvent) {
@@ -12,7 +13,7 @@ export function CommentForm() {
   }
 
   return (
-    <form className="modal__comment comment-form" onSubmit={handleSubmit}>
+    <form className="post__comment comment-form" onSubmit={handleSubmit}>
       <textarea className="comment-form__area" name="comment" id="comment" value={value} onChange={handleChange} />
       <div className="comment-form__actions" />
       <button className="comment-form__submit-btn" type="submit">Комментировать</button>

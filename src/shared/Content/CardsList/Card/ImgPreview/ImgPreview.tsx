@@ -6,10 +6,8 @@ interface IImgPreviewProps {
 }
 
 export function ImgPreview({ imgPreview }: IImgPreviewProps) {
-  // eslint-disable-next-line react/destructuring-assignment
-  const smallImg = imgPreview?.shift();
-  // eslint-disable-next-line react/destructuring-assignment
-  const bigImg = imgPreview?.pop();
+  const smallImg = imgPreview && [...imgPreview].shift();
+  const bigImg = imgPreview && [...imgPreview].pop();
 
   return (
     <div className="card__preview preview">
