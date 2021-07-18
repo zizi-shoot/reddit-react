@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
+import classNames from 'classnames';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useAuthorAvatar } from '../../../../../hooks/useAuthorAvatar';
 import { Post } from '../../../Post';
+import styles from './textcontent.scss';
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
@@ -13,13 +15,15 @@ interface ITextContentProps {
   username: string;
   createdAt: string;
   title: string;
+  extraClass?: string;
 }
 
-export function TextContent({ username, createdAt, title }: ITextContentProps) {
+export function TextContent({ username, createdAt, title, extraClass }: ITextContentProps) {
   const timeDiff = dayjs(+createdAt * 1000).fromNow();
   const [avatar] = useAuthorAvatar(username);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const modal = document.getElementById('modal');
+  const classes = classNames(extraClass, styles.container);
 
   function handleClick() {
     setIsModalOpened(true);
@@ -35,23 +39,23 @@ export function TextContent({ username, createdAt, title }: ITextContentProps) {
   }
 
   return (
-    <div className="card__text-content text-content">
-      <div className="text-content__meta text-meta">
-        <div className="text-meta__link">
+    <div className={classes}>
+      <div className={styles.meta}>
+        <div className={styles.metaLink}>
           <img
             src={avatar}
             alt="avatar"
-            className="text-meta__avatar"
+            className={styles.metaAvatar}
           />
-          <a href="#user-url" className="text-meta__username">{username}</a>
+          <a href="#user-url" className={styles.metaUsername}>{username}</a>
         </div>
-        <span className="text-content__created-at text-created-at">
-          <span className="text-created-at__label">опубликовано </span>
+        <span className={styles.createdAt}>
+          <span className={styles.createdAtLabel}>опубликовано </span>
           {timeDiff}
         </span>
       </div>
-      <h2 className="text-content__title text-title">
-        <button type="button" className="text-title__btn" onClick={handleClick}>{title}</button>
+      <h2 className={styles.title}>
+        <button type="button" className={styles.titleBtn} onClick={handleClick}>{title}</button>
       </h2>
       {
         isModalOpened

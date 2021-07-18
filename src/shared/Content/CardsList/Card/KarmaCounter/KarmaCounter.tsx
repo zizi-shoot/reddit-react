@@ -1,5 +1,6 @@
 import React from 'react';
 import { EIcons, Icon } from '../../../../Icon';
+import styles from './karmacounter.scss';
 
 interface IKarmaCounterProps {
   karma: number
@@ -7,12 +8,12 @@ interface IKarmaCounterProps {
 
 export function KarmaCounter({ karma }: IKarmaCounterProps) {
   return (
-    <div className="card__karma-counter karma-counter">
-      <button className="karma-counter__up" type="button">
+    <div className={styles.container}>
+      <button className={styles.up} type="button">
         <Icon name={EIcons.karmaUp} size={20} />
       </button>
-      <span className="karma-counter__value">{karma}</span>
-      <button className="karma-counter__down" type="button">
+      <span className={styles.value}>{karma}</span>
+      <button className={styles.down} type="button">
         <Icon name={EIcons.karmaDown} size={20} />
       </button>
     </div>

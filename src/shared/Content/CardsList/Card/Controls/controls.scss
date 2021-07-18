@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.commentsBtn {
+  display: flex;
+  align-items: center;
+
+  * {
+    color: var(--greyC4);
+  }
+}
+
+.commentsNum {
+  padding: 0 0 0 6px;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  > *:last-child {
+    margin: 0 0 0 15px;
+  }
+}
+
+.shareBtn,
+.saveBtn {
+  width: 20px;
+  height: 20px;
+}
+
+@media all and (min-width: 1024px) {
+  .container {
+    flex: 0 0;
+    order: 3;
+    margin: 0 0 0 24px;
+    padding: 0;
+  }
+
+  .commentsBtn {
+    display: none;
+  }
+
+  .actions {
+    display: none;
+  }
+}
+
+@media all and (min-width: 1524px) {
+  .container {
+    position: relative;
+  }
+}

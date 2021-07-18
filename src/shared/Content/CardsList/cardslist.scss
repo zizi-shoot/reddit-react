@@ -1,7 +1,9 @@
 @media all and (min-width: 1024px) {
-  .cards {
+  .container {
     padding: 40px 0;
   }
-}
 
-@import './Card/card';
+  .textContent {
+    order: 2;
+  }
+}

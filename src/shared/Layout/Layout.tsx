@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './layout.scss';
 
 interface ILayoutProps {
   children?: React.ReactNode;
@@ -6,7 +7,7 @@ interface ILayoutProps {
 
 export function Layout({ children }: ILayoutProps) {
   return (
-    <div className="container">
+    <div className={styles.container}>
       {children}
     </div>
   );

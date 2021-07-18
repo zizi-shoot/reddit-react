@@ -1,5 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { noop } from '../../utils/js/noop';
+import styles from './dropdown.scss';
 
 interface IDropdownProps {
   button: ReactNode;
@@ -30,13 +31,13 @@ export function Dropdown(props: IDropdownProps) {
   }
 
   return (
-    <div className="dropdown">
+    <div className={styles.container}>
       <div onClick={handleOpen}>
         {button}
       </div>
       {isDropdownOpen && (
-        <div className="dropdown__wrapper">
-          <div className="dropdown__list" onClick={() => setIsDropdownOpen(false)}>
+        <div className={styles.wrapper}>
+          <div className={styles.list} onClick={() => setIsDropdownOpen(false)}>
             {children}
           </div>
         </div>

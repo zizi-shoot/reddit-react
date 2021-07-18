@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './card.scss';
 
 interface ICardProps {
   children?: React.ReactNode;
@@ -6,7 +7,7 @@ interface ICardProps {
 
 export function Card({ children }: ICardProps) {
   return (
-    <li className="card">
+    <li className={styles.card}>
       {children}
     </li>
   );

@@ -14,6 +14,7 @@
   }
 }
 
+
 @media all and (min-width: 1024px) {
   .card {
     flex-wrap: nowrap;
@@ -35,10 +36,3 @@
     }
   }
 }
-
-@import './Controls/controls';
-@import './ImgPreview/imgpreview';
-@import './KarmaCounter/karmacounter';
-@import './MenuButton/menubutton';
-@import './Menu/menu';
-@import './TextContent/textcontent';

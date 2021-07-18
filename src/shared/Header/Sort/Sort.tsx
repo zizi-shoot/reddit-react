@@ -1,8 +1,15 @@
 import React from 'react';
+import classNames from 'classnames';
+import styles from './sort.scss';
 
-export function Sort() {
+interface ISortProps {
+  extraClass?: string;
+}
+
+export function Sort({ extraClass }: ISortProps) {
+  const classes = classNames(extraClass, styles.container);
   return (
-    <div className="header__sort">
+    <div className={classes}>
       sorting dropdown
     </div>
   );

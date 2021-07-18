@@ -1,9 +1,6 @@
 @media all and (min-width: 1024px) {
-  .content {
+  .container {
     background-color: var(--white);
     border-radius: 7px 7px 0 0;
   }
 }
-
-@import './CardsList/cardslist';
-@import './Post/post';

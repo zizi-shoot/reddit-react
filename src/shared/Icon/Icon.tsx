@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import styles from './icon.scss';
 import classNames from 'classnames';
 import { AnonIcon, CommentsIcon, ComplainIcon, HideIcon, KarmaDownIcon, KarmaUpIcon, MenuIcon, SaveIcon, ShareIcon } from '../Icons';
 
@@ -22,6 +23,7 @@ interface IIconProps {
   mobileSize?: TSizes;
   tabletSize?: TSizes;
   desktopSize?: TSizes;
+  extraClass?: string;
 }
 
 function setIconComponent(name: EIcons): ReactNode {
@@ -57,14 +59,16 @@ export function Icon(props: IIconProps) {
     mobileSize,
     tabletSize,
     desktopSize,
+    extraClass,
   } = props;
 
   const classes = classNames(
-    'icon',
-    `icon--s${size}`,
-    { [`icon--m${mobileSize}`]: mobileSize },
-    { [`icon--t${tabletSize}`]: tabletSize },
-    { [`icon--d${desktopSize}`]: desktopSize },
+    extraClass,
+    styles.container,
+    styles[`s${size}`],
+    { [styles[`m${mobileSize}`]]: mobileSize },
+    { [styles[`t${tabletSize}`]]: tabletSize },
+    { [styles[`d${desktopSize}`]]: desktopSize },
   );
 
   return (

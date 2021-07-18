@@ -1,7 +1,14 @@
 import React from 'react';
+import classNames from 'classnames';
+import styles from './title.scss';
 
-export function Title() {
+interface ITitleProps {
+  extraClass?: string;
+}
+
+export function Title({extraClass}: ITitleProps) {
+  const classes = classNames(extraClass, styles.container);
   return (
-    <h1 className="header__title">Header</h1>
+    <h1 className={classes}>Header</h1>
   );
 }

@@ -1,18 +1,18 @@
-.text-content {
+.container {
   display: flex;
   flex-flow: row wrap;
   padding: 22px 20px 13px;
 }
 
-.text-meta {
+.meta {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  width: 100%;
   font-size: 10px;
   line-height: 12px;
-  width: 100%;
 
-  &__link {
+  &Link {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -20,80 +20,80 @@
     padding: 0 6px 0 0;
   }
 
-  &__avatar {
+  &Avatar {
     width: 20px;
     height: 20px;
     margin: 0 7px 0 0;
     border-radius: 50%;
   }
 
-  &__username {
+  &Username {
     color: var(--orange);
   }
 }
 
-.text-created-at {
+
+.createdAt {
   &,
-  &__label {
+  &Label {
     color: var(--greyD9);
   }
 
-  &__label {
+  &Label {
     display: none;
   }
 }
 
-.text-title {
+.title {
   margin: 0;
   padding: 7px 0 0;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
 
-  &__btn {
+  &Btn {
     display: box;
     overflow: hidden;
-    -webkit-line-clamp: 2;
-    box-orient: vertical;
-    text-align: left;
     font-size: 16px;
     line-height: 19px;
+    text-align: left;
+    -webkit-line-clamp: 2;
+    box-orient: vertical;
   }
 }
 
 @media all and (min-width: 1024px) {
-  .text-content {
+  .container {
     flex-direction: column-reverse;
     justify-content: center;
-    order: 2;
     padding: 0 40px;
   }
 
-  .text-meta {
+  .meta {
     font-size: 14px;
     line-height: 16px;
 
-    &__link {
+    &Link {
       order: 1;
       padding-right: 0;
     }
   }
 
-  .text-created-at {
+  .createdAt {
     margin-right: 5px;
 
-    &__label {
+    &Label {
       display: inline;
     }
   }
 
-  .text-title {
+  .title {
     margin-bottom: 10px;
     padding: 0;
     font-size: 20px;
     line-height: 23px;
 
-    &__btn {
+    &Btn {
       font-size: 20px;
       line-height: 23px;
     }
@@ -101,22 +101,22 @@
 }
 
 @media all and (min-width: 1524px) {
-  .text-content {
+  .container {
     flex-basis: 672px;
   }
 
-  .text-meta {
-    &__username {
+  .meta {
+    &Username {
       position: relative;
       z-index: 1;
     }
 
-    &__link:hover &__username {
+    &Link:hover &Username {
       text-decoration: underline;
     }
   }
 
-  .text-title__btn::after {
+  .titleBtn::after {
     content: '';
     position: absolute;
     top: 0;

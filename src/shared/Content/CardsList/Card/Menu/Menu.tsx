@@ -3,35 +3,37 @@ import { merge } from '../../../../../utils/js/merge';
 import { GenericList } from '../../../../GenericList/GenericList';
 import { generateId } from '../../../../../utils/react/generateRandomIndex';
 import { EIcons, Icon } from '../../../../Icon';
+import styles from './menu.scss';
+import classNames from 'classnames';
 
 const ITEMS = [
   {
     As: 'li' as const,
-    className: 'menu__item menu__item--desktop',
+    className: classNames(styles.item, styles['item--desktop']),
     text: 'Комментарии',
     icon: Icon({ name: EIcons.comments, size: 14, mobileSize: 12 }),
   },
   {
     As: 'li' as const,
-    className: 'menu__item menu__item--desktop',
+    className: classNames(styles.item, styles['item--desktop']),
     text: 'Поделиться',
     icon: Icon({ name: EIcons.share, size: 14, mobileSize: 12 }),
   },
   {
     As: 'li' as const,
-    className: 'menu__item',
+    className: styles.item,
     text: 'Скрыть',
     icon: Icon({ name: EIcons.hide, size: 14, mobileSize: 12 }),
   },
   {
     As: 'li' as const,
-    className: 'menu__item menu__item--desktop',
+    className: classNames(styles.item, styles['item--desktop']),
     text: 'Сохранить',
     icon: Icon({ name: EIcons.save, size: 14, mobileSize: 12 }),
   },
   {
     As: 'li' as const,
-    className: 'menu__item',
+    className: styles.item,
     text: 'Пожаловаться',
     icon: Icon({ name: EIcons.complain, size: 16, mobileSize: 14 }),
   },
@@ -42,11 +44,11 @@ export function Menu() {
   const [items] = useState(ITEMS);
 
   return (
-    <div className="card__menu menu">
+    <div className={styles.container}>
       <ul>
         <GenericList list={items.map(merge({}))} />
       </ul>
-      <button className="menu__close-btn" type="button">Закрыть</button>
+      <button className={styles.closeBtn} type="button">Закрыть</button>
     </div>
   );
 }

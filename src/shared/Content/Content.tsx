@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './content.scss';
 
 interface IContentProps {
   children?: React.ReactNode;
@@ -6,7 +7,7 @@ interface IContentProps {
 
 export function Content({ children }: IContentProps) {
   return (
-    <main className="content">
+    <main className={styles.container}>
       {children}
     </main>
   );

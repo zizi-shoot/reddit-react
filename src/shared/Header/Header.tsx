@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './header.scss';
 
 import { Search } from './Search';
 import { Title } from './Title';
@@ -10,13 +11,13 @@ export function Header() {
   const [data] = useUserData();
 
   return (
-    <header className="header">
-      <div className="header__wrapper">
-        <Account avatarSrc={data.iconImg} username={data.name} />
+    <header className={styles.container}>
+      <div className={styles.wrapper}>
+        <Account avatarSrc={data.iconImg} username={data.name} extraClass={styles.account} />
         <Search />
       </div>
-      <Title />
-      <Sort />
+      <Title extraClass={styles.title} />
+      <Sort extraClass={styles.sort} />
     </header>
   );
 }

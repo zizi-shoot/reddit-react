@@ -4,6 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 const { DefinePlugin } = require('webpack');
 
 const { NODE_ENV } = process.env;
+const GLOBAL_SCSS_REGEXP = /\.global\.scss$/;
 
 module.exports = {
   target: 'node',
@@ -35,6 +36,28 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+                exportOnlyLocals: true,
+              },
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+        exclude: GLOBAL_SCSS_REGEXP,
+      },
+      {
+        test: GLOBAL_SCSS_REGEXP,
         use: [
           'css-loader',
           {

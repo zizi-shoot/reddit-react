@@ -1,5 +1,6 @@
 import React from 'react';
 import Placeholder from './placeholder.jpg';
+import styles from './imgpreview.scss';
 
 interface IImgPreviewProps {
   imgPreview: Array<string> | undefined;
@@ -10,11 +11,11 @@ export function ImgPreview({ imgPreview }: IImgPreviewProps) {
   const bigImg = imgPreview && [...imgPreview].pop();
 
   return (
-    <div className="card__preview preview">
+    <div className={styles.container}>
       {
         imgPreview
           ? (
-            <picture className="preview__img">
+            <picture className={styles.img}>
               <source srcSet={bigImg || smallImg} />
               <source media="(min-width: 1024px)" srcSet={smallImg} />
               <img src={bigImg} alt="preview" />
@@ -24,7 +25,7 @@ export function ImgPreview({ imgPreview }: IImgPreviewProps) {
             <img
               src={Placeholder}
               alt="preview"
-              className="preview__img"
+              className={styles.img}
             />
           )
       }

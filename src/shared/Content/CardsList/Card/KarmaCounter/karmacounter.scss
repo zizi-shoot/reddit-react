@@ -1,0 +1,43 @@
+.up,
+.down,
+.value {
+  padding: 0 0 0 4px;
+}
+
+.value {
+  vertical-align: top;
+  line-height: 23px;
+  color: var(--greyC4);
+}
+
+@media all and (min-width: 1024px) {
+  .container {
+    text-align: center;
+  }
+
+  .up,
+  .down,
+  .value {
+    padding: 7px 0 0;
+  }
+
+  .up {
+    margin-bottom: 4px;
+  }
+
+  .value {
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--black);
+  }
+}
+
+@media all and (min-width: 1524px) {
+  .up:hover svg path {
+    fill: var(--green);
+  }
+
+  .down:hover svg path {
+    fill: var(--orange);
+  }
+}

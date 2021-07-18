@@ -9,6 +9,7 @@ const COMMON_PLUGINS = [new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.
 const { NODE_ENV } = process.env;
 const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
+const GLOBAL_SCSS_REGEXP = /\.global\.scss$/;
 
 function setupDevtool() {
   if (IS_DEV) return 'inline-source-map';
@@ -44,6 +45,28 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        use: [
+          MinCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+        exclude: GLOBAL_SCSS_REGEXP,
+      },
+      {
+        test: GLOBAL_SCSS_REGEXP,
         use: [
           MinCssExtractPlugin.loader,
           'css-loader',
