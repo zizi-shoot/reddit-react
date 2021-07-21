@@ -8,3 +8,4 @@ export * from './KarmaUpIcon';
 export * from './KarmaDownIcon';
 export * from './AnonIcon';
 export * from './ArrowBackIcon';
+export * from './ActionsBtnIcon';

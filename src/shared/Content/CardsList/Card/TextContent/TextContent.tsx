@@ -5,7 +5,6 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useAuthorAvatar } from '../../../../../hooks/useAuthorAvatar';
-import { Post } from '../../../Post';
 import styles from './textcontent.scss';
 
 dayjs.locale('ru');
@@ -14,11 +13,19 @@ dayjs.extend(relativeTime);
 interface ITextContentProps {
   username: string;
   createdAt: string;
-  title: string;
+  title?: string;
+  partition?: string;
   extraClass?: string;
 }
 
-export function TextContent({ username, createdAt, title, extraClass }: ITextContentProps) {
+export function TextContent(props: ITextContentProps) {
+  const {
+    username,
+    createdAt,
+    title,
+    partition,
+    extraClass,
+  } = props;
   const timeDiff = dayjs(+createdAt * 1000).fromNow();
   const [avatar] = useAuthorAvatar(username);
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -28,19 +35,27 @@ export function TextContent({ username, createdAt, title, extraClass }: ITextCon
   function handleClick() {
     setIsModalOpened(true);
     modal?.classList.toggle('modal--hidden');
-    modal && disableBodyScroll(modal);
+    if (modal) disableBodyScroll(modal);
   }
 
   function handleClose() {
     setIsModalOpened(false);
     modal?.classList.toggle('modal--hidden');
-    modal && enableBodyScroll(modal);
+    if (modal) enableBodyScroll(modal);
     clearAllBodyScrollLocks();
   }
 
   return (
     <div className={classes}>
       <div className={styles.meta}>
+        {
+          partition
+          && (
+            <div className={styles.partitionWrapper}>
+              <span className={styles.partition}>{partition}</span>
+            </div>
+          )
+        }
         <div className={styles.metaLink}>
           <img
             src={avatar}
@@ -57,10 +72,10 @@ export function TextContent({ username, createdAt, title, extraClass }: ITextCon
       <h2 className={styles.title}>
         <button type="button" className={styles.titleBtn} onClick={handleClick}>{title}</button>
       </h2>
-      {
-        isModalOpened
-        && <Post onClose={handleClose} />
-      }
+      {/* { */}
+      {/*  isModalOpened */}
+      {/*  && <Post onClose={handleClose} /> */}
+      {/* } */}
     </div>
   );
 }

@@ -1,13 +1,18 @@
 import React from 'react';
+import classNames from 'classnames';
 import styles from './controls.scss';
 
 interface IControlProps {
-  children?: React.ReactNode;
+  children?: React.ReactNode,
+  extraClass?: string,
+  isComment?: boolean,
 }
 
-export function Controls({ children }: IControlProps) {
+export function Controls({ children, extraClass, isComment = false }: IControlProps) {
+  const classes = classNames(styles.container, extraClass);
+
   return (
-    <div className={styles.container}>
+    <div className={classes}>
       {children}
       <button className={styles.commentsBtn} type="button">
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +21,9 @@ export function Controls({ children }: IControlProps) {
             fill="#C4C4C4"
           />
         </svg>
-        <span className={styles.commentsNum}>13</span>
+        <span className={styles.commentsNum}>
+          {isComment ? 'Ответить' : 13}
+        </span>
       </button>
       <div className={styles.actions}>
         <button className={styles.shareBtn} type="button">

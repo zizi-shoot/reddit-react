@@ -1,15 +1,14 @@
 import React, { ReactNode } from 'react';
 import { noop } from '../../utils/js/noop';
 
-interface IItem {
+export interface IItem {
   id: string,
-  text: string,
+  text?: string,
   onClick?: (id: string) => void,
   className?: string
   As?: 'a' | 'li' | 'button' | 'div';
   href?: string,
   icon?: ReactNode,
-  component?: ReactNode,
 }
 
 interface IGenericListProps {
@@ -27,7 +26,6 @@ export function GenericList({ list }: IGenericListProps) {
         id,
         href,
         icon,
-        component
       }) => (
         <As
           className={className}
@@ -37,7 +35,6 @@ export function GenericList({ list }: IGenericListProps) {
         >
           {icon}
           {text}
-          {component}
         </As>
       ))}
     </>

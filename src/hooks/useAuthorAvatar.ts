@@ -9,7 +9,7 @@ export function useAuthorAvatar(author: string) {
   useEffect(() => {
     axios
       .get(
-        `https://oauth.reddit.com//user/${author}/about?raw_json=1`,
+        `https://oauth.reddit.com/user/${author}/about?raw_json=1`,
         { headers: { Authorization: `bearer ${token}` } },
       )
       .then((resp) => {

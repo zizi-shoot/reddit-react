@@ -1,42 +1,57 @@
-import React, { useState } from 'react';
-import { GenericList } from '../../../GenericList/GenericList';
-import { merge } from '../../../../utils/js/merge';
-import { generateId } from '../../../../utils/react/generateRandomIndex';
+import React from 'react';
+import classNames from 'classnames';
+import styles from './commentlist.scss';
+import { TextContent } from '../../CardsList/Card/TextContent';
+import { Controls } from '../../CardsList/Card/Controls';
+import { KarmaCounter } from '../../CardsList/Card/KarmaCounter';
+import { Comment } from './Comment';
 
-const ITEMS = [
-  {
-    As: 'li' as const,
-    className: 'comments__item',
-    text: 'Комментарии',
-  },
-  {
-    As: 'li' as const,
-    className: 'comments__item',
-    text: 'Поделиться',
-  },
-  {
-    As: 'li' as const,
-    className: 'comments__item',
-    text: 'Скрыть',
-  },
-  {
-    As: 'li' as const,
-    className: 'comments__item',
-    text: 'Сохранить',
-  },
-  {
-    As: 'li' as const,
-    className: 'comments__item',
-    text: 'Пожаловаться',
-  },
-].map(generateId);
+export interface IItem {
+  id: string,
+  author: string,
+  created: string,
+  score: number,
+  subitems?: IItem[],
+  partition?: string,
+}
 
-export function CommentList() {
-  const [items] = useState(ITEMS);
+interface ICommentListProps {
+  items: IItem[];
+  extraClass?: string;
+}
+
+export function CommentList({ items, extraClass }: ICommentListProps) {
+  const classes = classNames(styles.container, extraClass);
 
   return (
-    <ul className="post__comment-list comments">
-      <GenericList list={items.map(merge({}))} />
+    <ul className={classes}>
+      <>
+        {items.map(({
+          id,
+          author,
+          created,
+          score,
+          subitems,
+          partition,
+        }) => (
+          <Comment key={id}>
+            <TextContent
+              username={author}
+              createdAt={created}
+              partition={partition}
+              extraClass={styles.textContent}
+            />
+            <p>Сторонники тоталитаризма в науке будут объективно рассмотрены соответствующими инстанциями. Лишь реплицированные с зарубежных источников, современные исследования будут описаны максимально подробно. </p>
+            <Controls extraClass={styles.controls} isComment>
+              <KarmaCounter karma={score} />
+            </Controls>
+            {
+              subitems
+              && <CommentList items={subitems} extraClass={styles.commentList} />
+            }
+          </Comment>
+        ))}
+      </>
     </ul>
   );
 }

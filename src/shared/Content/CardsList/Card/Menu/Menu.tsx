@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { merge } from '../../../../../utils/js/merge';
 import { GenericList } from '../../../../GenericList/GenericList';
 import { generateId } from '../../../../../utils/react/generateRandomIndex';
 import { EIcons, Icon } from '../../../../Icon';
 import styles from './menu.scss';
-import classNames from 'classnames';
 
 const ITEMS = [
   {
@@ -40,7 +40,6 @@ const ITEMS = [
 ].map(generateId);
 
 export function Menu() {
-  // const handleItemClick = (id: string) => console.log(id);
   const [items] = useState(ITEMS);
 
   return (

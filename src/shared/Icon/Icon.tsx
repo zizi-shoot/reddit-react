@@ -1,7 +1,9 @@
 import React, { ReactNode } from 'react';
-import styles from './icon.scss';
 import classNames from 'classnames';
-import { AnonIcon, CommentsIcon, ComplainIcon, HideIcon, KarmaDownIcon, KarmaUpIcon, MenuIcon, SaveIcon, ShareIcon } from '../Icons';
+import styles from './icon.scss';
+import { ActionsBtnIcon, AnonIcon, ArrowBackIcon, CommentsIcon, ComplainIcon, HideIcon, KarmaDownIcon, KarmaUpIcon, MenuIcon, SaveIcon, ShareIcon } from '../Icons';
+import { EmojiBtnIcon } from '../Icons/EmojiBtnIcon';
+import { CommentBtnIcon } from '../Icons/CommentBtnIcon';
 
 export enum EIcons {
   comments,
@@ -13,6 +15,10 @@ export enum EIcons {
   karmaUp,
   karmaDown,
   anon,
+  arrowBack,
+  actions,
+  emoji,
+  comment
 }
 
 type TSizes = 12 | 14 | 16 | 20 | 30 | 50;
@@ -47,6 +53,14 @@ function setIconComponent(name: EIcons): ReactNode {
       return <KarmaDownIcon />;
     case EIcons.anon:
       return <AnonIcon />;
+    case EIcons.arrowBack:
+      return <ArrowBackIcon />;
+    case EIcons.actions:
+      return <ActionsBtnIcon />;
+    case EIcons.emoji:
+      return <EmojiBtnIcon />;
+    case EIcons.comment:
+      return <CommentBtnIcon />;
     default:
       return <></>;
   }
