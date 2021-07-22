@@ -3,7 +3,7 @@ import { Card } from './Card';
 import { Controls } from './Card/Controls';
 import { MenuButton } from './Card/MenuButton';
 import { ImgPreview } from './Card/ImgPreview';
-import { TextContent } from './Card/TextContent';
+import { TextContent } from '../TextContent';
 import { postsContext } from '../../context';
 import { KarmaCounter } from './Card/KarmaCounter';
 import styles from './cardslist.scss';

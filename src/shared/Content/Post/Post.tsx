@@ -4,13 +4,14 @@ import styles from './post.scss';
 import { useCloseModal } from '../../../hooks/useCloseModal';
 import { CommentForm } from './CommentForm';
 import { CommentList } from './CommentList';
-import { TextContent } from '../CardsList/Card/TextContent';
+import { TextContent } from '../TextContent';
 import { EIcons, Icon } from '../../Icon';
 import { generateId } from '../../../utils/react/generateRandomIndex';
-
-interface IPostProps {
-  onClose: () => void;
-}
+import { Controls } from '../CardsList/Card/Controls';
+import { KarmaCounter } from '../CardsList/Card/KarmaCounter';
+import { Dropdown } from '../../Dropdown';
+import { Menu } from '../Menu';
+import menuStyles from '../Menu/menu.scss';
 
 const SUBCOMMENTS2 = [
   {
@@ -60,6 +61,66 @@ const COMMENTS = [
   },
 ].map(generateId);
 
+const SORT_ITEMS = [
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Сначала новые',
+  },
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Сначала старые',
+  },
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Спорные',
+  },
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Вопрос-ответ',
+  },
+].map(generateId);
+
+const MENU_ITEMS = [
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Комментарии',
+    icon: Icon({ name: EIcons.comments, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Поделиться',
+    icon: Icon({ name: EIcons.share, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Скрыть',
+    icon: Icon({ name: EIcons.hide, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Сохранить',
+    icon: Icon({ name: EIcons.save, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: menuStyles.item,
+    text: 'Пожаловаться',
+    icon: Icon({ name: EIcons.complain, size: 16, mobileSize: 14 }),
+  },
+].map(generateId);
+
+interface IPostProps {
+  onClose: () => void;
+}
+
 export function Post({ onClose }: IPostProps) {
   const ref = useCloseModal(onClose);
   const modal = document.getElementById('modal');
@@ -76,19 +137,34 @@ export function Post({ onClose }: IPostProps) {
           <Icon name={EIcons.menu} size={20} />
         </button>
       </header>
-      <main>
+      <main className={styles.main}>
         <TextContent
           username="zizi_shoot"
           title="Следует отметить, что новая модель организационной деятельности поможет"
           createdAt="1626569316"
+          extraClass={styles.textContent}
         />
         <div className={styles.content}>
           <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>
           <p>Безусловно, глубокий уровень погружения создаёт необходимость включения в производственный план целого ряда внеочередных мероприятий с учётом комплекса системы массового участия. Внезапно, сделанные на базе интернет-аналитики выводы освещают чрезвычайно интересные особенности картины в целом, однако конкретные выводы, разумеется, описаны максимально подробно.</p>
           <p>Разнообразный и богатый опыт говорит нам, что выбранный нами инновационный путь обеспечивает широкому кругу (специалистов) участие в формировании новых принципов формирования материально-технической и кадровой базы. Также как существующая теория в значительной степени обусловливает важность благоприятных перспектив. Для современного мира консультация с широким активом однозначно определяет каждого участника как способного принимать собственные решения касаемо приоритизации разума над эмоциями!</p>
         </div>
-        <CommentForm />
-        <CommentList items={COMMENTS} />
+        <Controls extraClass={styles.controls}>
+          <KarmaCounter karma={12} />
+        </Controls>
+        <div className={styles.sort}>
+          <label htmlFor="sortBtn" className={styles.sortLabel}>Сортировать по:</label>
+          <Dropdown
+            button={(
+              <button type="button" id="sortBtn" className={styles.sortBtn}>Лучшие</button>
+            )}
+          >
+            <Menu items={SORT_ITEMS} />
+          </Dropdown>
+        </div>
+        <Menu items={MENU_ITEMS} extraClass={styles.menu} />
+        <CommentForm extraClass={styles.commentForm} />
+        <CommentList items={COMMENTS} extraClass={styles.commentList} />
       </main>
     </article>
   ), modal);

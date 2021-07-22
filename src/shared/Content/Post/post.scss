@@ -1,4 +1,7 @@
-
+@mixin reset-side-padding {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
 
 :global {
   .post {
@@ -34,6 +37,11 @@
   background-color: var(--black);
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
 .closeBtn {
   line-height: 0;
 }
@@ -58,16 +66,50 @@
   line-height: 19px;
 }
 
+.menu {
+  display: none;
+}
+
 .content {
   padding: 0 20px;
+  border-bottom: 1px solid var(--greyD9);
   font-size: 12px;
   line-height: 22px;
 }
 
 .comment {
-  border-left: 2px solid var(--greyD9);
-  padding-left: 9px;
   margin-bottom: 30px;
+  padding-left: 9px;
+  border-left: 2px solid var(--greyD9);
+}
+
+.sort {
+  display: flex;
+  margin-bottom: 20px;
+  padding: 13px 20px;
+  background-color: var(--greyF4);
+}
+
+.sortLabel {
+  margin-right: 5px;
+  color: var(--grey99);
+}
+
+.sortBtn {
+  position: relative;
+  color: var(--orange);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: -15px;
+    width: 8px;
+    height: 8px;
+    border: 1px solid;
+    border-color: transparent var(--orange) var(--orange) transparent;
+    transform: rotate(45deg);
+  }
 }
 
 @media all and (min-width: 1024px) {
@@ -80,7 +122,7 @@
 
   .container {
     margin: 0 auto;
-    padding: 52px 0 36px;
+    padding: 52px;
   }
 
   .header {
@@ -93,8 +135,58 @@
   }
 
   .content {
+    @include reset-side-padding;
+    order: 1;
     font-size: 14px;
     line-height: 16px;
+  }
+
+  .textContent {
+    @include reset-side-padding;
+    order: 0;
+  }
+
+  .sort {
+    @include reset-side-padding;
+    order: 4;
+    border-bottom: 1px solid var(--greyD9);
+    background-color: transparent;
+  }
+
+  .commentForm {
+    @include reset-side-padding ;
+    order: 3;
+    margin-bottom: 25px;
+  }
+
+  .commentList {
+    @include reset-side-padding;
+    order: 5;
+    padding-bottom: 0 !important;
+  }
+
+  .controls {
+    display: none;
+  }
+
+  .menu {
+    align-items: center;
+    order: 2;
+    position: static;
+    box-shadow: none;
+    margin-bottom: 20px;
+
+    ul {
+      display: flex;
+
+      li::after {
+        content: none;
+      }
+    }
+
+    button {
+      display: none;
+    }
   }
 }
 

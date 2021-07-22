@@ -1,22 +1,46 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './commentlist.scss';
-import { TextContent } from '../../CardsList/Card/TextContent';
+import { TextContent } from '../../TextContent';
 import { Controls } from '../../CardsList/Card/Controls';
 import { KarmaCounter } from '../../CardsList/Card/KarmaCounter';
 import { Comment } from './Comment';
+import { Menu } from '../../Menu';
+import { EIcons, Icon } from '../../../Icon';
+import { generateId } from '../../../../utils/react/generateRandomIndex';
 
-export interface IItem {
+const MENU_ITEMS = [
+  {
+    As: 'li' as const,
+    className: styles.menuItem,
+    text: 'Ответить',
+    icon: Icon({ name: EIcons.comments, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: styles.menuItem,
+    text: 'Поделиться',
+    icon: Icon({ name: EIcons.share, size: 14, mobileSize: 12 }),
+  },
+  {
+    As: 'li' as const,
+    className: styles.menuItem,
+    text: 'Пожаловаться',
+    icon: Icon({ name: EIcons.complain, size: 16, mobileSize: 14 }),
+  },
+].map(generateId);
+
+interface ICommentItem {
   id: string,
   author: string,
   created: string,
   score: number,
-  subitems?: IItem[],
+  subitems?: ICommentItem[],
   partition?: string,
 }
 
 interface ICommentListProps {
-  items: IItem[];
+  items: ICommentItem[];
   extraClass?: string;
 }
 
@@ -45,6 +69,7 @@ export function CommentList({ items, extraClass }: ICommentListProps) {
             <Controls extraClass={styles.controls} isComment>
               <KarmaCounter karma={score} />
             </Controls>
+            <Menu items={MENU_ITEMS} extraClass={styles.menu} />
             {
               subitems
               && <CommentList items={subitems} extraClass={styles.commentList} />

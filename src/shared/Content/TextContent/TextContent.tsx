@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { useAuthorAvatar } from '../../../../../hooks/useAuthorAvatar';
+import { useAuthorAvatar } from '../../../hooks/useAuthorAvatar';
 import styles from './textcontent.scss';
 
 dayjs.locale('ru');
@@ -69,9 +69,14 @@ export function TextContent(props: ITextContentProps) {
           {timeDiff}
         </span>
       </div>
-      <h2 className={styles.title}>
-        <button type="button" className={styles.titleBtn} onClick={handleClick}>{title}</button>
-      </h2>
+      {
+        title
+        && (
+          <h2 className={styles.title}>
+            <button type="button" className={styles.titleBtn} onClick={handleClick}>{title}</button>
+          </h2>
+        )
+      }
       {/* { */}
       {/*  isModalOpened */}
       {/*  && <Post onClose={handleClose} /> */}

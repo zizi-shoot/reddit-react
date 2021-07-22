@@ -1,8 +1,11 @@
 
 .container {
-  border-left: 2px solid var(--greyD9);
   padding-left: 9px;
-  margin-bottom: 30px;
+  border-left: 2px solid var(--greyD9);
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
 }
 
 

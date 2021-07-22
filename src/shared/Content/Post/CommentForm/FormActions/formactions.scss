@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.item:hover svg path {
+  fill: var(--orange);
+}

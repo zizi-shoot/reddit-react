@@ -8,6 +8,41 @@
   padding: 0;
 }
 
+
 .commentList {
   padding-top: 30px;
+}
+
+
+.menu {
+  position: static;
+  box-shadow: none;
+  display: none;
+
+  ul {
+    display: flex;
+    gap: 24px;
+  }
+
+  button {
+    display: none;
+  }
+}
+
+.menuItem {
+  color: var(--grey99);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+@media all and (min-width: 1024px) {
+  .controls {
+    display: none;
+  }
+
+  .menu {
+    display: block;
+  }
 }

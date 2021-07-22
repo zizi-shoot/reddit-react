@@ -64,3 +64,9 @@
     display: block;
   }
 }
+
+@media all and (min-width: 1524px) {
+  .closeBtn {
+    display: none;
+  }
+}
