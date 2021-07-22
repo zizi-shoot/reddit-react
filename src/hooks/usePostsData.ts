@@ -9,7 +9,7 @@ interface IPostsData {
   author: string,
   title: string,
   imgPreview: TImgPreview,
-  created: string,
+  createdUtc: string,
   score: number,
 }
 
@@ -35,14 +35,15 @@ export function usePostsData() {
         const postsData = resp.data.data.children;
 
         setData(postsData.map(({ data: post }: IPost) => {
-          const { id, author, title, created, score } = post;
+          const { id, author, title, created_utc: createdUtc, score } = post;
+          console.log(post);
           const imgPreview = post.preview?.images[0].resolutions
             .map((item: IResolutionItems) => item.url);
           return {
             id,
             author,
             title,
-            created,
+            createdUtc,
             score,
             imgPreview,
           };

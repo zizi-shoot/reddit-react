@@ -6,16 +6,18 @@ import 'dayjs/locale/ru';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useAuthorAvatar } from '../../../hooks/useAuthorAvatar';
 import styles from './textcontent.scss';
+import { Post } from '../Post';
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
 
 interface ITextContentProps {
-  username: string;
-  createdAt: string;
-  title?: string;
-  partition?: string;
-  extraClass?: string;
+  username: string,
+  createdAt: string,
+  title?: string,
+  partition?: string,
+  extraClass?: string,
+  isModal?: boolean,
 }
 
 export function TextContent(props: ITextContentProps) {
@@ -25,6 +27,7 @@ export function TextContent(props: ITextContentProps) {
     title,
     partition,
     extraClass,
+    isModal = false,
   } = props;
   const timeDiff = dayjs(+createdAt * 1000).fromNow();
   const [avatar] = useAuthorAvatar(username);
@@ -33,14 +36,16 @@ export function TextContent(props: ITextContentProps) {
   const classes = classNames(extraClass, styles.container);
 
   function handleClick() {
+    if (isModal) return;
     setIsModalOpened(true);
-    modal?.classList.toggle('modal--hidden');
+    modal?.classList.toggle('post--hidden');
     if (modal) disableBodyScroll(modal);
   }
 
   function handleClose() {
     setIsModalOpened(false);
-    modal?.classList.toggle('modal--hidden');
+    console.log(`${isModalOpened} click out`);
+    modal?.classList.toggle('post--hidden');
     if (modal) enableBodyScroll(modal);
     clearAllBodyScrollLocks();
   }
@@ -77,10 +82,10 @@ export function TextContent(props: ITextContentProps) {
           </h2>
         )
       }
-      {/* { */}
-      {/*  isModalOpened */}
-      {/*  && <Post onClose={handleClose} /> */}
-      {/* } */}
+      {
+        isModalOpened
+        && <Post onClose={handleClose} />
+      }
     </div>
   );
 }

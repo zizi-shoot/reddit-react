@@ -118,11 +118,11 @@ const MENU_ITEMS = [
 ].map(generateId);
 
 interface IPostProps {
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export function Post({ onClose }: IPostProps) {
-  const ref = useCloseModal(onClose);
+  const ref = useCloseModal({ onClose });
   const modal = document.getElementById('modal');
   if (!modal) return null;
 
@@ -143,6 +143,7 @@ export function Post({ onClose }: IPostProps) {
           title="Следует отметить, что новая модель организационной деятельности поможет"
           createdAt="1626569316"
           extraClass={styles.textContent}
+          isModal
         />
         <div className={styles.content}>
           <p>Есть над чем задуматься: тщательные исследования конкурентов представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. Прежде всего, начало повседневной работы по формированию позиции однозначно фиксирует необходимость кластеризации усилий. Но сторонники тоталитаризма в науке и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище, хотя само их существование приносит несомненную пользу обществу.</p>

@@ -14,7 +14,7 @@ const indexTemplate = (content, token) => `
 </head>
 <body>
   <div id="app">${content}</div>
-  <div id="modal" class="post"></div>
+  <div id="modal" class="post post--hidden"></div>
 </body>
 </html>
 `;

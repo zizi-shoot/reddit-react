@@ -1,19 +1,24 @@
 import { useEffect, useRef } from 'react';
 
-export function useCloseModal(onClose: () => void) {
+interface ICloseModalProps {
+  onClose?: () => void,
+}
+
+export function useCloseModal(props: ICloseModalProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
+      console.log(event.target);
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
-        onClose?.();
+        props.onClose?.();
       }
     }
 
     document.addEventListener('click', handleClick);
 
     return () => document.removeEventListener('click', handleClick);
-  }, [onClose]);
+  }, []);
 
   return ref;
 }

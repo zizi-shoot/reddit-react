@@ -6,7 +6,7 @@ interface IPostsContextData {
   author: string,
   title: string,
   imgPreview: TImgPreview,
-  created: string,
+  createdUtc: string,
   score: number,
 }
 

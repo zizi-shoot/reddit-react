@@ -19,14 +19,14 @@ export function CardsList() {
           author,
           title,
           imgPreview,
-          created,
+          createdUtc,
           score,
         }) => (
           <Card key={id}>
             <TextContent
               username={author}
               title={title}
-              createdAt={created}
+              createdAt={createdUtc}
               extraClass={styles.textContent}
             />
             <ImgPreview imgPreview={imgPreview} />

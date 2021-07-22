@@ -8,7 +8,6 @@ import { CardsList } from './shared/Content/CardsList';
 import { useToken } from './hooks/useToken';
 import { PostsContextProvider, tokenContext } from './shared/context';
 import { commentContext } from './shared/context/commentContext';
-import { Post } from './shared/Content/Post';
 
 function AppComponent() {
   const [commentValue, setCommentValue] = useState('');
@@ -27,7 +26,6 @@ function AppComponent() {
       <tokenContext.Provider value={token}>
         <PostsContextProvider>
           <Layout>
-            <Post onClose={handleClose} />
             <Header />
             <Content>
               <CardsList />
