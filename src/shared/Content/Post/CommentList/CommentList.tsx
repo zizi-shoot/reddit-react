@@ -40,8 +40,8 @@ interface ICommentItem {
 }
 
 interface ICommentListProps {
-  items: ICommentItem[];
-  extraClass?: string;
+  items: ICommentItem[],
+  extraClass?: string,
 }
 
 export function CommentList({ items, extraClass }: ICommentListProps) {

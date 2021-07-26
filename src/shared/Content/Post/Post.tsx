@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.scss';
 import { useCloseModal } from '../../../hooks/useCloseModal';
@@ -9,7 +9,6 @@ import { EIcons, Icon } from '../../Icon';
 import { generateId } from '../../../utils/react/generateRandomIndex';
 import { Controls } from '../CardsList/Card/Controls';
 import { KarmaCounter } from '../CardsList/Card/KarmaCounter';
-import { Dropdown } from '../../Dropdown';
 import { Menu } from '../Menu';
 import menuStyles from '../Menu/menu.scss';
 
@@ -61,28 +60,6 @@ const COMMENTS = [
   },
 ].map(generateId);
 
-const SORT_ITEMS = [
-  {
-    As: 'li' as const,
-    className: menuStyles.item,
-    text: 'Сначала новые',
-  },
-  {
-    As: 'li' as const,
-    className: menuStyles.item,
-    text: 'Сначала старые',
-  },
-  {
-    As: 'li' as const,
-    className: menuStyles.item,
-    text: 'Спорные',
-  },
-  {
-    As: 'li' as const,
-    className: menuStyles.item,
-    text: 'Вопрос-ответ',
-  },
-].map(generateId);
 
 const MENU_ITEMS = [
   {
@@ -123,6 +100,7 @@ interface IPostProps {
 
 export function Post({ onClose }: IPostProps) {
   const ref = useCloseModal({ onClose });
+  const sortRef = useRef(null);
   const modal = document.getElementById('modal');
   if (!modal) return null;
 
@@ -153,15 +131,9 @@ export function Post({ onClose }: IPostProps) {
         <Controls extraClass={styles.controls}>
           <KarmaCounter karma={12} />
         </Controls>
-        <div className={styles.sort}>
+        <div className={styles.sort} ref={sortRef}>
           <label htmlFor="sortBtn" className={styles.sortLabel}>Сортировать по:</label>
-          <Dropdown
-            button={(
-              <button type="button" id="sortBtn" className={styles.sortBtn}>Лучшие</button>
-            )}
-          >
-            <Menu items={SORT_ITEMS} />
-          </Dropdown>
+          <button type="button" id="sortBtn" className={styles.sortBtn}>Лучшие</button>
         </div>
         <Menu items={MENU_ITEMS} extraClass={styles.menu} />
         <CommentForm extraClass={styles.commentForm} />

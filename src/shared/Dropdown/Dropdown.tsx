@@ -1,10 +1,13 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { CSSProperties, ReactNode, RefObject, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { noop } from '../../utils/js/noop';
 import styles from './dropdown.scss';
+import { getCoords } from '../../utils/js/getCoords';
 
 interface IDropdownProps {
   button: ReactNode;
   children: ReactNode;
+  parentRef?: RefObject<HTMLDivElement>,
   isOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
@@ -14,15 +17,11 @@ export function Dropdown(props: IDropdownProps) {
   const {
     button,
     children,
+    parentRef,
     isOpen,
     onOpen = noop,
     onClose = noop,
   } = props;
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
-
-  useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
-  useEffect(() => (isDropdownOpen ? onOpen() : onClose()), [isDropdownOpen]);
 
   function handleOpen() {
     if (!isOpen) {
@@ -30,8 +29,32 @@ export function Dropdown(props: IDropdownProps) {
     }
   }
 
-  return (
-    <div className={styles.container}>
+  const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
+  const [style, setStyle] = useState<CSSProperties>();
+
+  useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
+  useEffect(() => (isDropdownOpen ? onOpen() : onClose()), [isDropdownOpen]);
+  useEffect(() => {
+    function handleResize() {
+      const coords = getCoords(parentRef?.current);
+      setStyle({
+        position: 'absolute',
+        top: `${coords.top - 15}px`,
+        left: `${coords.left - 10}px`,
+      });
+    }
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [parentRef]);
+
+  const dropdown = document.getElementById('dropdown');
+  if (!dropdown) return null;
+
+  return ReactDOM.createPortal((
+    <div className={styles.container} style={style}>
       <div onClick={handleOpen}>
         {button}
       </div>
@@ -43,5 +66,5 @@ export function Dropdown(props: IDropdownProps) {
         </div>
       )}
     </div>
-  );
+  ), dropdown);
 }

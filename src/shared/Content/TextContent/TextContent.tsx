@@ -44,7 +44,6 @@ export function TextContent(props: ITextContentProps) {
 
   function handleClose() {
     setIsModalOpened(false);
-    console.log(`${isModalOpened} click out`);
     modal?.classList.toggle('post--hidden');
     if (modal) enableBodyScroll(modal);
     clearAllBodyScrollLocks();

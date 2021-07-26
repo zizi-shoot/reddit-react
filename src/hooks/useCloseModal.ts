@@ -9,7 +9,6 @@ export function useCloseModal(props: ICloseModalProps) {
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
-      console.log(event.target);
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
         props.onClose?.();
       }

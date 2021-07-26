@@ -36,7 +36,6 @@ export function usePostsData() {
 
         setData(postsData.map(({ data: post }: IPost) => {
           const { id, author, title, created_utc: createdUtc, score } = post;
-          console.log(post);
           const imgPreview = post.preview?.images[0].resolutions
             .map((item: IResolutionItems) => item.url);
           return {

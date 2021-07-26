@@ -6,7 +6,7 @@ interface ITitleProps {
   extraClass?: string;
 }
 
-export function Title({extraClass}: ITitleProps) {
+export function Title({ extraClass }: ITitleProps) {
   const classes = classNames(extraClass, styles.container);
   return (
     <h1 className={classes}>Header</h1>
