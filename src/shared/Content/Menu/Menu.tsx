@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import { merge } from '../../../utils/js/merge';
 import { GenericList, IItem } from '../../GenericList/GenericList';
 import styles from './menu.scss';
+import { merge } from '../../../utils/js/merge';
 
 interface IMenuProps {
   items: IItem[],

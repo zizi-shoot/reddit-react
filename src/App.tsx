@@ -6,16 +6,12 @@ import { Header } from './shared/Header';
 import { Content } from './shared/Content';
 import { CardsList } from './shared/Content/CardsList';
 import { useToken } from './hooks/useToken';
-import { PostsContextProvider, tokenContext } from './shared/context';
-import { commentContext } from './shared/context/commentContext';
+import { commentContext, PostsContextProvider, tokenContext } from './shared/context';
 
 function AppComponent() {
   const [commentValue, setCommentValue] = useState('');
   const [token] = useToken();
-
   const CommentProvider = commentContext.Provider;
-
-  const handleClose = () => {};
 
   return (
     <CommentProvider value={{

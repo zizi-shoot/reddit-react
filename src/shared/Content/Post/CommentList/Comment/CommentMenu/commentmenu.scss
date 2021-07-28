@@ -1,0 +1,38 @@
+.list {
+  display: none;
+  gap: 24px;
+}
+
+.item {
+  font-size: 12px;
+  line-height: 1.15;
+  color: var(--grey99);
+
+  &--desktop {
+    display: none;
+  }
+
+  svg {
+    margin-right: 4px;
+  }
+
+  button {
+    color: inherit;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--orange);
+
+      svg > * {
+        fill: var(--orange);
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .list {
+    display: flex;
+  }
+}

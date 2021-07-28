@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.scss';
 import { useCloseModal } from '../../../hooks/useCloseModal';
@@ -11,6 +11,7 @@ import { Controls } from '../CardsList/Card/Controls';
 import { KarmaCounter } from '../CardsList/Card/KarmaCounter';
 import { Menu } from '../Menu';
 import menuStyles from '../Menu/menu.scss';
+import { focusContext } from '../../context';
 
 const SUBCOMMENTS2 = [
   {
@@ -60,7 +61,6 @@ const COMMENTS = [
   },
 ].map(generateId);
 
-
 const MENU_ITEMS = [
   {
     As: 'li' as const,
@@ -100,7 +100,13 @@ interface IPostProps {
 
 export function Post({ onClose }: IPostProps) {
   const ref = useCloseModal({ onClose });
-  const sortRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const FocusProvider = focusContext.Provider;
+
+  function handleBlur() {
+    setIsFocused(false);
+  }
+
   const modal = document.getElementById('modal');
   if (!modal) return null;
 
@@ -131,14 +137,22 @@ export function Post({ onClose }: IPostProps) {
         <Controls extraClass={styles.controls}>
           <KarmaCounter karma={12} />
         </Controls>
-        <div className={styles.sort} ref={sortRef}>
+        <div className={styles.sort}>
           <label htmlFor="sortBtn" className={styles.sortLabel}>Сортировать по:</label>
           <button type="button" id="sortBtn" className={styles.sortBtn}>Лучшие</button>
         </div>
         <Menu items={MENU_ITEMS} extraClass={styles.menu} />
-        <CommentForm extraClass={styles.commentForm} />
-        <CommentList items={COMMENTS} extraClass={styles.commentList} />
+        <CommentForm extraClass={styles.commentForm} isFocused={isFocused} onBlur={handleBlur} />
+        <FocusProvider
+          value={{
+            value: isFocused,
+            onClick: setIsFocused,
+          }}
+        >
+          <CommentList items={COMMENTS} extraClass={styles.commentList} />
+        </FocusProvider>
       </main>
+      ƒ
     </article>
   ), modal);
 }

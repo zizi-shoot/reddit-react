@@ -30,10 +30,11 @@ export function TextContent(props: ITextContentProps) {
     isModal = false,
   } = props;
   const timeDiff = dayjs(+createdAt * 1000).fromNow();
-  const [avatar] = useAuthorAvatar(username);
-  const [isModalOpened, setIsModalOpened] = useState(false);
   const modal = document.getElementById('modal');
   const classes = classNames(extraClass, styles.container);
+
+  const [avatar] = useAuthorAvatar(username);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   function handleClick() {
     if (isModal) return;

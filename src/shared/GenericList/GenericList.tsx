@@ -4,7 +4,7 @@ import { noop } from '../../utils/js/noop';
 export interface IItem {
   id: string,
   text?: string,
-  onClick?: (id: string) => void,
+  onClick?: () => void,
   className?: string
   As?: 'a' | 'li' | 'button' | 'div';
   href?: string,
@@ -29,12 +29,14 @@ export function GenericList({ list }: IGenericListProps) {
       }) => (
         <As
           className={className}
-          onClick={() => onClick(id)}
+          onClick={onClick}
           key={id}
           href={href}
         >
-          {icon}
-          {text}
+          <button type="button">
+            {icon}
+            {text}
+          </button>
         </As>
       ))}
     </>

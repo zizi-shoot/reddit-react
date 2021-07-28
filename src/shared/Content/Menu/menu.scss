@@ -45,6 +45,10 @@
     &:hover {
       color: var(--orange);
 
+      button {
+        color: var(--orange);
+      }
+
       svg > * {
         fill: var(--orange);
       }

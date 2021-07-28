@@ -1,12 +1,11 @@
-type TCoordsProps = HTMLDivElement | undefined | null;
-
-export function getCoords(node: TCoordsProps) {
+export function getCoords(node: any) {
   let top = 0;
   let left = 0;
-  while (node) {
-    top += +node.offsetTop;
-    left += +node.offsetLeft;
-    node = node.offsetParent;
+  let _node = node;
+  while (_node) {
+    top += +_node.offsetTop;
+    left += +_node.offsetLeft;
+    _node = _node.offsetParent;
   }
   return {
     top,

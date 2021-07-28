@@ -5,30 +5,7 @@ import { TextContent } from '../../TextContent';
 import { Controls } from '../../CardsList/Card/Controls';
 import { KarmaCounter } from '../../CardsList/Card/KarmaCounter';
 import { Comment } from './Comment';
-import { Menu } from '../../Menu';
-import { EIcons, Icon } from '../../../Icon';
-import { generateId } from '../../../../utils/react/generateRandomIndex';
-
-const MENU_ITEMS = [
-  {
-    As: 'li' as const,
-    className: styles.menuItem,
-    text: 'Ответить',
-    icon: Icon({ name: EIcons.comments, size: 14, mobileSize: 12 }),
-  },
-  {
-    As: 'li' as const,
-    className: styles.menuItem,
-    text: 'Поделиться',
-    icon: Icon({ name: EIcons.share, size: 14, mobileSize: 12 }),
-  },
-  {
-    As: 'li' as const,
-    className: styles.menuItem,
-    text: 'Пожаловаться',
-    icon: Icon({ name: EIcons.complain, size: 16, mobileSize: 14 }),
-  },
-].map(generateId);
+import { CommentMenu } from './Comment/CommentMenu';
 
 interface ICommentItem {
   id: string,
@@ -69,7 +46,7 @@ export function CommentList({ items, extraClass }: ICommentListProps) {
             <Controls extraClass={styles.controls} isComment>
               <KarmaCounter karma={score} />
             </Controls>
-            <Menu items={MENU_ITEMS} extraClass={styles.menu} />
+            <CommentMenu />
             {
               subitems
               && <CommentList items={subitems} extraClass={styles.commentList} />
