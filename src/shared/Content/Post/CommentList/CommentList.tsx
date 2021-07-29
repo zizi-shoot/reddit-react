@@ -43,10 +43,10 @@ export function CommentList({ items, extraClass }: ICommentListProps) {
               extraClass={styles.textContent}
             />
             <p>Сторонники тоталитаризма в науке будут объективно рассмотрены соответствующими инстанциями. Лишь реплицированные с зарубежных источников, современные исследования будут описаны максимально подробно. </p>
-            <Controls extraClass={styles.controls} isComment>
+            <Controls extraClass={styles.controls} isComment author={author}>
               <KarmaCounter karma={score} />
             </Controls>
-            <CommentMenu />
+            <CommentMenu author={author} />
             {
               subitems
               && <CommentList items={subitems} extraClass={styles.commentList} />

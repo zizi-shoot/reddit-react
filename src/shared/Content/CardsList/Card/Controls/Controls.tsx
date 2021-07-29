@@ -1,19 +1,22 @@
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import styles from './controls.scss';
-import { focusContext } from '../../../../context';
+import { commentContext, focusContext } from '../../../../context';
 
 interface IControlProps {
   children?: React.ReactNode,
   extraClass?: string,
   isComment?: boolean,
+  author?: string,
 }
 
-export function Controls({ children, extraClass, isComment = false }: IControlProps) {
+export function Controls({ children, extraClass, author, isComment = false }: IControlProps) {
   const classes = classNames(styles.container, extraClass);
   const { onClick } = useContext(focusContext);
+  const { onChange } = useContext(commentContext);
 
   function handleClick() {
+    onChange(`${author}, `);
     onClick(true);
   }
 
