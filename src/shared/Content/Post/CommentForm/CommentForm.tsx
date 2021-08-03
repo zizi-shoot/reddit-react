@@ -1,12 +1,10 @@
 import React, { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
 import styles from './commentform.scss';
 import actionsStyles from './FormActions/formactions.scss';
 import { EIcons, Icon } from '../../../Icon';
 import { FormActions } from './FormActions';
 import { generateId } from '../../../../utils/react/generateRandomIndex';
-import { RootState, updateComment } from '../../../../store';
 
 const items = [
   {
@@ -121,13 +119,22 @@ const items = [
 
 interface ICommentFormProps {
   extraClass?: string,
-  isFocused?: boolean,
+  isFocused: boolean,
+  value: string,
   onBlur: () => void,
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
+  onSubmit: (event: FormEvent) => void,
 }
 
-export function CommentForm({ extraClass, isFocused, onBlur }: ICommentFormProps) {
-  const dispatch = useDispatch();
-  const value = useSelector<RootState, string>((state) => state.commentText);
+export function CommentForm(props: ICommentFormProps) {
+  const {
+    extraClass,
+    isFocused,
+    onBlur,
+    onSubmit,
+    onChange,
+    value,
+  } = props;
   const textRef = useRef<HTMLTextAreaElement>(null);
   const classes = classNames(styles.container, extraClass);
 
@@ -135,20 +142,21 @@ export function CommentForm({ extraClass, isFocused, onBlur }: ICommentFormProps
     if (isFocused) textRef.current?.focus();
   }, [isFocused]);
 
-  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    dispatch(updateComment(event.target.value));
-  }
-
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-  }
-
   return (
-    <form className={classes} onSubmit={handleSubmit}>
+    <form className={classes} onSubmit={onSubmit}>
       <button className={styles.actionsBtn} type="submit">
         <Icon name={EIcons.actions} size={20} />
       </button>
-      <textarea className={styles.area} name="comment" id="comment" value={value} onChange={handleChange} placeholder="Ваш комментарий" ref={textRef} onBlur={onBlur} />
+      <textarea
+        ref={textRef}
+        className={styles.area}
+        name="comment"
+        id="comment"
+        placeholder="Ваш комментарий"
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
       <button className={styles.emojiBtn} type="submit">
         <Icon name={EIcons.emoji} size={20} />
       </button>
