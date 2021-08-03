@@ -1,18 +1,12 @@
 import React, { useContext } from 'react';
 import styles from './commentmenu.scss';
 import { EIcons, Icon } from '../../../../../Icon';
-import { commentContext, focusContext } from '../../../../../context';
+import { focusContext } from '../../../../../context';
 
-interface ICommentMenuProps {
-  author: string,
-}
-
-export function CommentMenu({ author }: ICommentMenuProps) {
+export function CommentMenu() {
   const { onClick } = useContext(focusContext);
-  const { onChange } = useContext(commentContext);
 
   function handleClick() {
-    onChange(`${author}, `);
     onClick(true);
   }
 

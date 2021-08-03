@@ -1,6 +1,5 @@
-import React, { ChangeEvent, FormEvent, useContext, useEffect, useRef } from 'react';
+import React, { FormEvent, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import { commentContext } from '../../../context';
 import styles from './commentform.scss';
 import actionsStyles from './FormActions/formactions.scss';
 import { EIcons, Icon } from '../../../Icon';
@@ -126,16 +125,11 @@ interface ICommentFormProps {
 
 export function CommentForm({ extraClass, isFocused, onBlur }: ICommentFormProps) {
   const classes = classNames(styles.container, extraClass);
-  const { value, onChange } = useContext(commentContext);
   const textRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (isFocused) textRef.current?.focus();
   }, [isFocused]);
-
-  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    onChange(event.target.value);
-  }
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -146,7 +140,7 @@ export function CommentForm({ extraClass, isFocused, onBlur }: ICommentFormProps
       <button className={styles.actionsBtn} type="submit">
         <Icon name={EIcons.actions} size={20} />
       </button>
-      <textarea className={styles.area} name="comment" id="comment" value={value} onChange={handleChange} placeholder="Ваш комментарий" ref={textRef} onBlur={onBlur} />
+      <textarea className={styles.area} name="comment" id="comment" placeholder="Ваш комментарий" ref={textRef} onBlur={onBlur} />
       <button className={styles.emojiBtn} type="submit">
         <Icon name={EIcons.emoji} size={20} />
       </button>
