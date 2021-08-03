@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
 import styles from './controls.scss';
-import { commentContext, focusContext } from '../../../../context';
+import { focusContext } from '../../../../context';
+import { updateComment } from '../../../../../store';
 
 interface IControlProps {
   children?: React.ReactNode,
@@ -11,12 +13,12 @@ interface IControlProps {
 }
 
 export function Controls({ children, extraClass, author, isComment = false }: IControlProps) {
+  const dispatch = useDispatch();
   const classes = classNames(styles.container, extraClass);
   const { onClick } = useContext(focusContext);
-  const { onChange } = useContext(commentContext);
 
   function handleClick() {
-    onChange(`${author}, `);
+    dispatch(updateComment(`${author}, `));
     onClick(true);
   }
 

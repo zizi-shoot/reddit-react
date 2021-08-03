@@ -1,11 +1,12 @@
-import React, { ChangeEvent, FormEvent, useContext, useEffect, useRef } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import { commentContext } from '../../../context';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './commentform.scss';
 import actionsStyles from './FormActions/formactions.scss';
 import { EIcons, Icon } from '../../../Icon';
 import { FormActions } from './FormActions';
 import { generateId } from '../../../../utils/react/generateRandomIndex';
+import { RootState, updateComment } from '../../../../store';
 
 const items = [
   {
@@ -125,16 +126,17 @@ interface ICommentFormProps {
 }
 
 export function CommentForm({ extraClass, isFocused, onBlur }: ICommentFormProps) {
-  const classes = classNames(styles.container, extraClass);
-  const { value, onChange } = useContext(commentContext);
+  const dispatch = useDispatch();
+  const value = useSelector<RootState, string>((state) => state.commentText);
   const textRef = useRef<HTMLTextAreaElement>(null);
+  const classes = classNames(styles.container, extraClass);
 
   useEffect(() => {
     if (isFocused) textRef.current?.focus();
   }, [isFocused]);
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    onChange(event.target.value);
+    dispatch(updateComment(event.target.value));
   }
 
   function handleSubmit(event: FormEvent) {
