@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { tokenContext } from '../shared/context';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 export type TImgPreview = Array<string> | undefined;
 
@@ -23,7 +24,7 @@ interface IPost {
 
 export function usePostsData() {
   const [data, setData] = useState<IPostsData[]>([]);
-  const token = useContext(tokenContext);
+  const token = useSelector<RootState, string>((state) => state.userToken);
 
   useEffect(() => {
     axios

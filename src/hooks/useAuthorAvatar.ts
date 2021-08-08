@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { tokenContext } from '../shared/context';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 export function useAuthorAvatar(author: string) {
   const [avatar, setAvatar] = useState('');
-  const token = useContext(tokenContext);
+  const token = useSelector<RootState, string>((state) => state.userToken);
 
   useEffect(() => {
     axios

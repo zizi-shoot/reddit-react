@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './main.global.scss';
 import { hot } from 'react-hot-loader/root';
 import { createStore } from 'redux';
@@ -8,27 +8,29 @@ import { Layout } from './shared/Layout';
 import { Header } from './shared/Header';
 import { Content } from './shared/Content';
 import { CardsList } from './shared/Content/CardsList';
-import { useToken } from './hooks/useToken';
-import { PostsContextProvider, tokenContext } from './shared/context';
-import { rootReducer } from './store';
+import { PostsContextProvider } from './shared/context';
+import { rootReducer, setToken } from './store';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
 function AppComponent() {
-  const [token] = useToken();
-
+  useEffect(() => {
+    const token = localStorage.getItem('token') || window.__token__;
+    store.dispatch(setToken(token));
+    if (token) {
+      localStorage.setItem('token', token);
+    }
+  }, []);
   return (
     <Provider store={store}>
-      <tokenContext.Provider value={token}>
-        <PostsContextProvider>
-          <Layout>
-            <Header />
-            <Content>
-              <CardsList />
-            </Content>
-          </Layout>
-        </PostsContextProvider>
-      </tokenContext.Provider>
+      <PostsContextProvider>
+        <Layout>
+          <Header />
+          <Content>
+            <CardsList />
+          </Content>
+        </Layout>
+      </PostsContextProvider>
     </Provider>
   );
 }

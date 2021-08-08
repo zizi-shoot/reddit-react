@@ -156,7 +156,6 @@ export function Post({ onClose }: IPostProps) {
           <CommentList items={COMMENTS} extraClass={styles.commentList} />
         </FocusProvider>
       </main>
-      ƒ
     </article>
   ), modal);
 }
