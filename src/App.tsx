@@ -7,9 +7,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { Layout } from './shared/Layout';
 import { Header } from './shared/Header';
 import { rootReducer, setToken } from './store';
-import { CardsList } from './shared/Content/CardsList';
-import { PostsContextProvider } from './shared/context';
 import { Content } from './shared/Content';
+import { CardsListContainer } from './shared/Content/CardsListContainer';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -21,16 +20,15 @@ function AppComponent() {
       localStorage.setItem('token', token);
     }
   }, []);
+
   return (
     <Provider store={store}>
-      <PostsContextProvider>
-        <Layout>
-          <Header />
-          <Content>
-            <CardsList />
-          </Content>
-        </Layout>
-      </PostsContextProvider>
+      <Layout>
+        <Header />
+        <Content>
+          <CardsListContainer />
+        </Content>
+      </Layout>
     </Provider>
   );
 }

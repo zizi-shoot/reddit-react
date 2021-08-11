@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { RootState, setPosts } from '../../../store';
+import { CardsList } from '../CardsList';
 
-export type TImgPreview = Array<string> | undefined;
+type TImgPreview = Array<string> | undefined;
 
-interface IPostsData {
+export interface IPostsData {
   id: string,
   author: string,
   title: string,
@@ -14,17 +15,18 @@ interface IPostsData {
   score: number,
 }
 
-interface IResolutionItems {
+export interface IResolutionItems {
   [N: string]: string | number;
 }
 
-interface IPost {
+export interface IPost {
   [N: string]: any;
 }
 
-export function usePostsData() {
-  const [data, setData] = useState<IPostsData[]>([]);
+export function CardsListContainer() {
   const token = useSelector<RootState, string>((state) => state.userToken);
+  const posts = useSelector<RootState, IPostsData[]>((state) => state.posts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -35,7 +37,7 @@ export function usePostsData() {
       .then((resp) => {
         const postsData = resp.data.data.children;
 
-        setData(postsData.map(({ data: post }: IPost) => {
+        dispatch(setPosts(postsData.map(({ data: post }: IPost) => {
           const { id, author, title, created_utc: createdUtc, score } = post;
           const imgPreview = post.preview?.images[0].resolutions
             .map((item: IResolutionItems) => item.url);
@@ -47,10 +49,12 @@ export function usePostsData() {
             score,
             imgPreview,
           };
-        }));
+        })));
       })
       .catch(console.log);
   }, [token]);
 
-  return [data];
+  return (
+    <CardsList posts={posts} />
+  );
 }
