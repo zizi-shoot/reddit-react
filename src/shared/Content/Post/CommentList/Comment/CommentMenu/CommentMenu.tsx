@@ -1,18 +1,20 @@
 import React, { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './commentmenu.scss';
 import { EIcons, Icon } from '../../../../../Icon';
-import { commentContext, focusContext } from '../../../../../context';
+import { focusContext } from '../../../../../context';
+import { updateComment } from '../../../../../../store';
 
 interface ICommentMenuProps {
   author: string,
 }
 
 export function CommentMenu({ author }: ICommentMenuProps) {
+  const dispatch = useDispatch();
   const { onClick } = useContext(focusContext);
-  const { onChange } = useContext(commentContext);
 
   function handleClick() {
-    onChange(`${author}, `);
+    dispatch(updateComment(`${author}, `));
     onClick(true);
   }
 

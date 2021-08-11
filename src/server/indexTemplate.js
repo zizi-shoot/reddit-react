@@ -9,6 +9,7 @@ const indexTemplate = (content, token) => `
   <link rel="stylesheet" href="/static/main.css">
   <script defer src="/static/client.js"></script>
   <script>
+    window.history.replaceState(null, null, document.location.origin)
     window.__token__ = '${token}'
   </script>
 </head>

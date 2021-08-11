@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.scss';
 import { useCloseModal } from '../../../hooks/useCloseModal';
-import { CommentForm } from './CommentForm';
+import { CommentFormContainer } from './CommentFormContainer';
 import { CommentList } from './CommentList';
 import { TextContent } from '../TextContent';
 import { EIcons, Icon } from '../../Icon';
@@ -142,7 +142,11 @@ export function Post({ onClose }: IPostProps) {
           <button type="button" id="sortBtn" className={styles.sortBtn}>Лучшие</button>
         </div>
         <Menu items={MENU_ITEMS} extraClass={styles.menu} />
-        <CommentForm extraClass={styles.commentForm} isFocused={isFocused} onBlur={handleBlur} />
+        <CommentFormContainer
+          extraClass={styles.commentForm}
+          isFocused={isFocused}
+          onBlur={handleBlur}
+        />
         <FocusProvider
           value={{
             value: isFocused,
@@ -152,7 +156,6 @@ export function Post({ onClose }: IPostProps) {
           <CommentList items={COMMENTS} extraClass={styles.commentList} />
         </FocusProvider>
       </main>
-      ƒ
     </article>
   ), modal);
 }
