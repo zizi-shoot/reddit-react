@@ -6,10 +6,10 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Layout } from './shared/Layout';
 import { Header } from './shared/Header';
-import { Content } from './shared/Content';
+import { rootReducer, setToken } from './store';
 import { CardsList } from './shared/Content/CardsList';
 import { PostsContextProvider } from './shared/context';
-import { rootReducer, setToken } from './store';
+import { Content } from './shared/Content';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
