@@ -29,6 +29,7 @@ export function CardsListContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!token) return;
     axios
       .get(
         'https://oauth.reddit.com/best?raw_json=1',

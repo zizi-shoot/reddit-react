@@ -14,6 +14,7 @@ export function Header() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!token) return;
     axios
       .get(
         'https://oauth.reddit.com/api/v1/me?raw_json=1',
