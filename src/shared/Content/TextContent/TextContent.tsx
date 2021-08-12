@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import styles from './textcontent.scss';
 import { Post } from '../Post';
-import { RootState, setAuthorAvatar } from '../../../store';
+import { IRootState, setAuthorAvatar } from '../../../store';
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
@@ -34,8 +34,8 @@ export function TextContent(props: ITextContentProps) {
   const timeDiff = dayjs(+createdAt * 1000).fromNow();
   const modal = document.getElementById('modal');
   const classes = classNames(extraClass, styles.container);
-  const token = useSelector<RootState, string>((state) => state.userToken);
-  const avatar = useSelector<RootState, string>((state) => state.authorsAvatars[username]);
+  const token = useSelector<IRootState, string>((state) => state.userToken);
+  const avatar = useSelector<IRootState, string>((state) => state.authorsAvatars[username]);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const dispatch = useDispatch();
 

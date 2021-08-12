@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { RootState, setPosts } from '../../../store';
+import { IRootState, setPosts } from '../../../store';
 import { CardsList } from '../CardsList';
 
 type TImgPreview = Array<string> | undefined;
@@ -24,8 +24,8 @@ export interface IPost {
 }
 
 export function CardsListContainer() {
-  const token = useSelector<RootState, string>((state) => state.userToken);
-  const posts = useSelector<RootState, IPostsData[]>((state) => state.posts);
+  const token = useSelector<IRootState, string>((state) => state.userToken);
+  const posts = useSelector<IRootState, IPostsData[]>((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -6,11 +6,11 @@ import { Search } from './Search';
 import { Title } from './Title';
 import { Sort } from './Sort';
 import { Account } from './Account';
-import { IUserData, RootState, setUserData } from '../../store';
+import { IRootState, IUserData, setUserData } from '../../store';
 
 export function Header() {
-  const token = useSelector<RootState, string>((state) => state.userToken);
-  const userData = useSelector<RootState, IUserData>((state) => state.userData);
+  const token = useSelector<IRootState, string>((state) => state.userToken);
+  const userData = useSelector<IRootState, IUserData>((state) => state.userData);
   const dispatch = useDispatch();
 
   useEffect(() => {

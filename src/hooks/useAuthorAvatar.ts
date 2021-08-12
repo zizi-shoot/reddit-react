@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { IRootState } from '../store';
 
 export function useAuthorAvatar(author: string) {
   const [avatar, setAvatar] = useState('');
-  const token = useSelector<RootState, string>((state) => state.userToken);
+  const token = useSelector<IRootState, string>((state) => state.userToken);
 
   useEffect(() => {
     axios
