@@ -3,13 +3,13 @@ import { Card } from './Card';
 import { Controls } from './Card/Controls';
 import { MenuButton } from './Card/MenuButton';
 import { ImgPreview } from './Card/ImgPreview';
-import { TextContent } from '../TextContent';
 import { KarmaCounter } from './Card/KarmaCounter';
 import styles from './cardslist.scss';
-import { IPostsData } from '../CardsListContainer';
+import { TextContentContainer } from '../TextContentContainer';
+import { IPost } from '../../../types';
 
 interface IProps {
-  posts: IPostsData[],
+  posts: IPost[],
 }
 
 export function CardsList({ posts }: IProps) {
@@ -25,7 +25,7 @@ export function CardsList({ posts }: IProps) {
           score,
         }) => (
           <Card key={id}>
-            <TextContent
+            <TextContentContainer
               username={author}
               title={title}
               createdAt={createdUtc}

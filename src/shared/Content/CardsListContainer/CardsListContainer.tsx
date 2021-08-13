@@ -1,31 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { IRootState, setPosts } from '../../../store';
 import { CardsList } from '../CardsList';
+import { IPostsData, IRootState } from '../../../types';
+import { setPosts } from '../../../store/actions';
 
-type TImgPreview = Array<string> | undefined;
-
-export interface IPostsData {
-  id: string,
-  author: string,
-  title: string,
-  imgPreview: TImgPreview,
-  createdUtc: string,
-  score: number,
-}
-
-export interface IResolutionItems {
+interface IResolutionItems {
   [N: string]: string | number;
 }
 
-export interface IPost {
+interface IPostAPI {
   [N: string]: any;
 }
 
 export function CardsListContainer() {
-  const token = useSelector<IRootState, string>((state) => state.userToken);
-  const posts = useSelector<IRootState, IPostsData[]>((state) => state.posts);
+  const token = useSelector<IRootState, string>((state) => state.token);
+  const postsEntities = useSelector<IRootState, IPostsData>((state) => state.entities.posts);
+  const postsOrder = useSelector<IRootState, string[]>((state) => state.posts);
+  const posts = postsOrder?.map((item) => postsEntities[item]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,8 +30,7 @@ export function CardsListContainer() {
       )
       .then((resp) => {
         const postsData = resp.data.data.children;
-
-        dispatch(setPosts(postsData.map(({ data: post }: IPost) => {
+        dispatch(setPosts(postsData.map(({ data: post }: IPostAPI) => {
           const { id, author, title, created_utc: createdUtc, score } = post;
           const imgPreview = post.preview?.images[0].resolutions
             .map((item: IResolutionItems) => item.url);

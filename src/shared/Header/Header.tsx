@@ -6,11 +6,12 @@ import { Search } from './Search';
 import { Title } from './Title';
 import { Sort } from './Sort';
 import { Account } from './Account';
-import { IRootState, IUserData, setUserData } from '../../store';
+import { IAccountData, IRootState } from '../../types';
+import { setAccountData } from '../../store/actions';
 
 export function Header() {
-  const token = useSelector<IRootState, string>((state) => state.userToken);
-  const userData = useSelector<IRootState, IUserData>((state) => state.userData);
+  const token = useSelector<IRootState, string>((state) => state.token);
+  const accountData = useSelector<IRootState, IAccountData>((state) => state.account);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export function Header() {
       )
       .then((resp) => {
         const { data } = resp;
-        dispatch(setUserData({ name: data.name, iconImg: data.icon_img }));
+        dispatch(setAccountData({ name: data.name, avatar: data.icon_img }));
       })
       .catch(console.log);
   }, [token]);
@@ -31,8 +32,8 @@ export function Header() {
     <header className={styles.container}>
       <div className={styles.wrapper}>
         <Account
-          avatarSrc={userData.iconImg}
-          username={userData.name}
+          avatarSrc={accountData.avatar}
+          username={accountData.name}
           extraClass={styles.account}
         />
         <Search />

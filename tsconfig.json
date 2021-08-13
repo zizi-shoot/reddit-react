@@ -75,6 +75,7 @@
     "types",
   ],
   "exclude": [
-    "./bin"
+    "./bin",
+    "./node_modules"
   ]
 }

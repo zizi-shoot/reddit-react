@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styles from './commentmenu.scss';
 import { EIcons, Icon } from '../../../../../Icon';
 import { focusContext } from '../../../../../context';
-import { updateComment } from '../../../../../../store';
+import { updateComment } from '../../../../../../store/actions';
 
 interface ICommentMenuProps {
   author: string,

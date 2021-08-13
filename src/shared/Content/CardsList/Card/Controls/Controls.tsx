@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import styles from './controls.scss';
 import { focusContext } from '../../../../context';
-import { updateComment } from '../../../../../store';
+import { updateComment } from '../../../../../store/actions';
 
 interface IControlProps {
   children?: React.ReactNode,
