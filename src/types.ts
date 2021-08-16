@@ -1,6 +1,3 @@
-import { ThunkAction } from 'redux-thunk';
-import { Action } from 'redux';
-
 interface IUser {
   name: string,
   avatar: string,
@@ -13,6 +10,8 @@ interface IUsers {
 interface IAccountData {
   name: string,
   avatar: string,
+  loading: boolean,
+  error: string,
 }
 
 type TImgPreview = Array<string> | undefined;
@@ -41,10 +40,7 @@ interface IRootState {
   posts: string[];
 }
 
-type TThunkAction = ThunkAction<void, IRootState, unknown, Action<string>>;
-
 export {
-  TThunkAction,
   IRootState,
   IPostsData,
   IPost,

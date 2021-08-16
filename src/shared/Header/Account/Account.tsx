@@ -5,12 +5,13 @@ import { EIcons, Icon } from '../../Icon';
 import { EColor, Text } from '../../Text';
 
 interface IAccountProps {
-  avatarSrc?: string;
-  username?: string;
-  extraClass?: string;
+  avatarSrc?: string,
+  username?: string,
+  loading?: boolean,
+  extraClass?: string,
 }
 
-export function Account({ avatarSrc, username, extraClass }: IAccountProps) {
+export function Account({ avatarSrc, username, loading, extraClass }: IAccountProps) {
   const classes = classNames(extraClass, styles.container);
 
   function onClick() {
@@ -29,9 +30,11 @@ export function Account({ avatarSrc, username, extraClass }: IAccountProps) {
           : (<Icon name={EIcons.anon} size={50} mobileSize={30} extraClass={styles.icon} />)
       }
       <span className={styles.name}>
-        <Text size={20} color={username ? EColor.black : EColor.grey99}>
-          {username || 'Аноним'}
-        </Text>
+        {loading ? (
+          <Text size={20} color={username ? EColor.black : EColor.grey99}>Загрузка...</Text>
+        ) : (
+          <Text size={20} color={username ? EColor.black : EColor.grey99}>{username || 'Аноним'}</Text>
+        )}
       </span>
     </a>
   );

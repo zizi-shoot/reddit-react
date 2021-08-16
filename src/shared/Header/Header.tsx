@@ -1,32 +1,13 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import React from 'react';
 import styles from './header.scss';
 import { Search } from './Search';
 import { Title } from './Title';
 import { Sort } from './Sort';
 import { Account } from './Account';
-import { IAccountData, IRootState } from '../../types';
-import { setAccountData } from '../../store/actions';
+import { useAccountData } from '../../hooks/useAccountData';
 
 export function Header() {
-  const token = useSelector<IRootState, string>((state) => state.token);
-  const accountData = useSelector<IRootState, IAccountData>((state) => state.account);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!token) return;
-    axios
-      .get(
-        'https://oauth.reddit.com/api/v1/me?raw_json=1',
-        { headers: { Authorization: `bearer ${token}` } },
-      )
-      .then((resp) => {
-        const { data } = resp;
-        dispatch(setAccountData({ name: data.name, avatar: data.icon_img }));
-      })
-      .catch(console.log);
-  }, [token]);
+  const { accountData, loading } = useAccountData();
 
   return (
     <header className={styles.container}>
@@ -34,6 +15,7 @@ export function Header() {
         <Account
           avatarSrc={accountData.avatar}
           username={accountData.name}
+          loading={loading}
           extraClass={styles.account}
         />
         <Search />

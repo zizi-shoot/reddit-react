@@ -1,12 +1,16 @@
 import { Reducer } from 'redux';
 import { IPost, IRootState } from '../types';
 import { ActionType } from './actions';
+import { AccountActions } from './account/actions';
+import { accountReducer } from './account/reducer';
 
 const initialState: IRootState = {
   token: '',
   account: {
     avatar: '',
     name: '',
+    loading: false,
+    error: '',
   },
   comment: '',
   entities: {
@@ -15,6 +19,7 @@ const initialState: IRootState = {
   },
   posts: [],
 };
+
 const rootReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.UPDATE_COMMENT:
@@ -51,6 +56,13 @@ const rootReducer: Reducer = (state = initialState, action) => {
             [action.user.name]: action.user,
           },
         },
+      };
+    case AccountActions.ACCOUNT_REQUEST:
+    case AccountActions.ACCOUNT_REQUEST_SUCCESS:
+    case AccountActions.ACCOUNT_REQUEST_ERROR:
+      return {
+        ...state,
+        account: accountReducer(state.account, action),
       };
     default:
       return state;
