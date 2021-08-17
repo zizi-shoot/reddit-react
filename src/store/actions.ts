@@ -1,11 +1,10 @@
 import { ActionCreator, AnyAction } from 'redux';
-import { IAccountData, IPost, IUser } from '../types';
+import { IPost, IUser } from '../types';
 
 enum ActionType {
   UPDATE_COMMENT = 'UPDATE_COMMENT',
   SET_TOKEN = 'SET_TOKEN',
   SET_POSTS = 'SET_POSTS',
-  SET_ACCOUNT_DATA = 'SET_ACCOUNT_DATA',
   SET_USER = 'SET_USER',
 }
 
@@ -21,10 +20,6 @@ const setPosts: ActionCreator<AnyAction> = (posts: IPost[]) => ({
   type: ActionType.SET_POSTS,
   posts,
 });
-const setAccountData: ActionCreator<AnyAction> = (account: IAccountData) => ({
-  type: ActionType.SET_ACCOUNT_DATA,
-  account,
-});
 const setUser: ActionCreator<AnyAction> = (user: IUser) => ({
   type: ActionType.SET_USER,
   user,
@@ -33,7 +28,6 @@ const setUser: ActionCreator<AnyAction> = (user: IUser) => ({
 export {
   ActionType,
   setUser,
-  setAccountData,
   setPosts,
   setToken,
   updateComment,

@@ -3,21 +3,21 @@ import axios from 'axios';
 import { IAccountData } from '../../types';
 import { TAccountRequestAction, TAccountRequestErrorAction, TAccountRequestSuccessAction, TThunkAction } from './types';
 
-enum AccountActions {
-  ACCOUNT_REQUEST = 'ACCOUNT_REQUEST',
-  ACCOUNT_REQUEST_SUCCESS = 'ACCOUNT_REQUEST_SUCCESS',
-  ACCOUNT_REQUEST_ERROR = 'ACCOUNT_REQUEST_ERROR',
+enum AccountAction {
+  REQUEST = 'ACCOUNT_REQUEST',
+  REQUEST_SUCCESS = 'ACCOUNT_REQUEST_SUCCESS',
+  REQUEST_ERROR = 'ACCOUNT_REQUEST_ERROR',
 }
 
 const accountRequest: ActionCreator<TAccountRequestAction> = () => ({
-  type: AccountActions.ACCOUNT_REQUEST,
+  type: AccountAction.REQUEST,
 });
 const accountRequestSuccess: ActionCreator<TAccountRequestSuccessAction> = (account: IAccountData) => ({
-  type: AccountActions.ACCOUNT_REQUEST_SUCCESS,
+  type: AccountAction.REQUEST_SUCCESS,
   account,
 });
 const accountRequestError: ActionCreator<TAccountRequestErrorAction> = (error: string) => ({
-  type: AccountActions.ACCOUNT_REQUEST_ERROR,
+  type: AccountAction.REQUEST_ERROR,
   error,
 });
 
@@ -39,7 +39,7 @@ const accountRequestAsync = (): TThunkAction => (dispatch, getState) => {
 };
 
 export {
-  AccountActions,
+  AccountAction,
   accountRequest,
   accountRequestSuccess,
   accountRequestError,

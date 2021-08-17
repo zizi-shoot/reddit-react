@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { IPost, IRootState } from '../types';
 import { ActionType } from './actions';
-import { AccountActions } from './account/actions';
+import { AccountAction } from './account/actions';
 import { accountReducer } from './account/reducer';
 
 const initialState: IRootState = {
@@ -41,11 +41,6 @@ const rootReducer: Reducer = (state = initialState, action) => {
           posts: Object.fromEntries(action.posts.map((post: IPost) => [post.id, post])),
         },
       };
-    case ActionType.SET_ACCOUNT_DATA:
-      return {
-        ...state,
-        account: action.account,
-      };
     case ActionType.SET_USER:
       return {
         ...state,
@@ -57,9 +52,9 @@ const rootReducer: Reducer = (state = initialState, action) => {
           },
         },
       };
-    case AccountActions.ACCOUNT_REQUEST:
-    case AccountActions.ACCOUNT_REQUEST_SUCCESS:
-    case AccountActions.ACCOUNT_REQUEST_ERROR:
+    case AccountAction.REQUEST:
+    case AccountAction.REQUEST_SUCCESS:
+    case AccountAction.REQUEST_ERROR:
       return {
         ...state,
         account: accountReducer(state.account, action),

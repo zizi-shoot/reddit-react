@@ -1,31 +1,31 @@
 import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
 import { IAccountData, IRootState } from '../../types';
-import { AccountActions } from './actions';
+import { AccountAction } from './actions';
 
 type TAccountRequestAction = {
-  type: typeof AccountActions.ACCOUNT_REQUEST;
+  type: typeof AccountAction.REQUEST;
 }
 type TAccountRequestSuccessAction = {
-  type: typeof AccountActions.ACCOUNT_REQUEST_SUCCESS;
+  type: typeof AccountAction.REQUEST_SUCCESS;
   account: IAccountData,
 }
 type TAccountRequestErrorAction = {
-  type: typeof AccountActions.ACCOUNT_REQUEST_ERROR;
+  type: typeof AccountAction.REQUEST_ERROR;
   error: string,
 }
 
 interface IAccountRequestAction {
-  type: AccountActions.ACCOUNT_REQUEST;
+  type: AccountAction.REQUEST;
 }
 
 interface IAccountRequestSuccessAction {
-  type: AccountActions.ACCOUNT_REQUEST_SUCCESS;
+  type: AccountAction.REQUEST_SUCCESS;
   account: IAccountData,
 }
 
 interface IAccountRequestErrorAction {
-  type: AccountActions.ACCOUNT_REQUEST_ERROR;
+  type: AccountAction.REQUEST_ERROR;
   error: string,
 }
 
