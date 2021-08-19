@@ -1,7 +1,8 @@
 import { ActionCreator } from 'redux';
 import axios from 'axios';
 import { IAccountData } from '../../types';
-import { TAccountRequestAction, TAccountRequestErrorAction, TAccountRequestSuccessAction, TThunkAction } from './types';
+import { TAccountRequestAction, TAccountRequestErrorAction, TAccountRequestSuccessAction } from './types';
+import { TThunkAction } from '../types';
 
 enum AccountAction {
   REQUEST = 'ACCOUNT_REQUEST',
@@ -26,7 +27,7 @@ const accountRequestAsync = (): TThunkAction => (dispatch, getState) => {
   axios
     .get(
       'https://oauth.reddit.com/api/v1/me?raw_json=1',
-      { headers: { Authorization: `bearer ${getState().token}` } },
+      { headers: { Authorization: `bearer ${getState().token.value}` } },
     )
     .then((resp) => {
       const { data } = resp;

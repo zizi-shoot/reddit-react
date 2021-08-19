@@ -4,6 +4,7 @@ import axios from 'axios';
 import { TextContent } from '../TextContent';
 import { IRootState, IUsers } from '../../../types';
 import { setUser } from '../../../store/actions';
+import { IToken } from '../../../store/token/types';
 
 interface ITextContentProps {
   username: string,
@@ -23,7 +24,7 @@ export function TextContentContainer(props: ITextContentProps) {
     extraClass,
     isModal = false,
   } = props;
-  const token = useSelector<IRootState, string>((state) => state.token);
+  const token = useSelector<IRootState, IToken>((state) => state.token);
   const users = useSelector<IRootState, IUsers>((state) => state.entities.users);
   const avatar = users[username]?.avatar;
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export function TextContentContainer(props: ITextContentProps) {
     axios
       .get(
         `https://oauth.reddit.com/user/${username}/about?raw_json=1`,
-        { headers: { Authorization: `bearer ${token}` } },
+        { headers: { Authorization: `bearer ${token.value}` } },
       )
       .then((resp) => {
         dispatch(setUser({ name: username, avatar: resp.data.data.icon_img }));

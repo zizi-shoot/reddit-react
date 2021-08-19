@@ -3,9 +3,14 @@ import { IPost, IRootState } from '../types';
 import { ActionType } from './actions';
 import { AccountAction } from './account/actions';
 import { accountReducer } from './account/reducer';
+import { TokenAction } from './token/actions';
+import { tokenReducer } from './token/reducer';
+import { ITokenAction } from './token/types';
 
 const initialState: IRootState = {
-  token: '',
+  token: {
+    value: '',
+  },
   account: {
     avatar: '',
     name: '',
@@ -26,11 +31,6 @@ const rootReducer: Reducer = (state = initialState, action) => {
       return {
         ...state,
         comment: action.text,
-      };
-    case ActionType.SET_TOKEN:
-      return {
-        ...state,
-        token: action.token,
       };
     case ActionType.SET_POSTS:
       return {
@@ -58,6 +58,11 @@ const rootReducer: Reducer = (state = initialState, action) => {
       return {
         ...state,
         account: accountReducer(state.account, action),
+      };
+    case TokenAction.SAVE_TOKEN:
+      return {
+        ...state,
+        token: tokenReducer(state.token, <ITokenAction>action),
       };
     default:
       return state;

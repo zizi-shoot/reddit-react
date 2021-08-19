@@ -1,3 +1,5 @@
+import { IToken } from './store/token/types';
+
 interface IUser {
   name: string,
   avatar: string,
@@ -30,7 +32,7 @@ interface IPostsData {
 }
 
 interface IRootState {
-  token: string;
+  token: IToken;
   account: IAccountData;
   comment: string;
   entities: {

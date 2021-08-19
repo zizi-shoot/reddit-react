@@ -3,7 +3,6 @@ import { IPost, IUser } from '../types';
 
 enum ActionType {
   UPDATE_COMMENT = 'UPDATE_COMMENT',
-  SET_TOKEN = 'SET_TOKEN',
   SET_POSTS = 'SET_POSTS',
   SET_USER = 'SET_USER',
 }
@@ -11,10 +10,6 @@ enum ActionType {
 const updateComment: ActionCreator<AnyAction> = (text: string) => ({
   type: ActionType.UPDATE_COMMENT,
   text,
-});
-const setToken: ActionCreator<AnyAction> = (token: string) => ({
-  type: ActionType.SET_TOKEN,
-  token,
 });
 const setPosts: ActionCreator<AnyAction> = (posts: IPost[]) => ({
   type: ActionType.SET_POSTS,
@@ -29,6 +24,5 @@ export {
   ActionType,
   setUser,
   setPosts,
-  setToken,
   updateComment,
 };

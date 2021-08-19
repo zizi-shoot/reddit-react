@@ -1,6 +1,4 @@
-import { ThunkAction } from 'redux-thunk';
-import { Action } from 'redux';
-import { IAccountData, IRootState } from '../../types';
+import { IAccountData } from '../../types';
 import { AccountAction } from './actions';
 
 type TAccountRequestAction = {
@@ -36,7 +34,6 @@ interface IActions {
 }
 
 type TActions = IActions[keyof IActions];
-type TThunkAction = ThunkAction<void, IRootState, unknown, Action<string>>;
 
 export {
   TAccountRequestErrorAction,
@@ -45,7 +42,5 @@ export {
   IAccountRequestAction,
   IAccountRequestSuccessAction,
   IAccountRequestErrorAction,
-  IActions,
   TActions,
-  TThunkAction,
 };

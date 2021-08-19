@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CardsList } from '../CardsList';
 import { IPostsData, IRootState } from '../../../types';
 import { setPosts } from '../../../store/actions';
+import { IToken } from '../../../store/token/types';
 
 interface IResolutionItems {
   [N: string]: string | number;
@@ -14,7 +15,7 @@ interface IPostAPI {
 }
 
 export function CardsListContainer() {
-  const token = useSelector<IRootState, string>((state) => state.token);
+  const token = useSelector<IRootState, IToken>((state) => state.token);
   const postsEntities = useSelector<IRootState, IPostsData>((state) => state.entities.posts);
   const postsOrder = useSelector<IRootState, string[]>((state) => state.posts);
   const posts = postsOrder?.map((item) => postsEntities[item]);
@@ -22,11 +23,11 @@ export function CardsListContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return;
+    if (!token.value) return;
     axios
       .get(
         'https://oauth.reddit.com/best?raw_json=1',
-        { headers: { Authorization: `bearer ${token}` } },
+        { headers: { Authorization: `bearer ${token.value}` } },
       )
       .then((resp) => {
         const postsData = resp.data.data.children;

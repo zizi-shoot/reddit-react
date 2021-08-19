@@ -10,7 +10,7 @@ const accountState: IAccountData = {
   error: '',
 };
 
-const accountReducer: Reducer<IAccountData, TActions> = (state: IAccountData = accountState, action) => {
+const accountReducer: Reducer<IAccountData, TActions> = (state = accountState, action) => {
   switch (action.type) {
     case AccountAction.REQUEST:
       return {
