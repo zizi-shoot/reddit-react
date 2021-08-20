@@ -28,7 +28,12 @@ interface IPost {
 }
 
 interface IPostsData {
-  [N: string]: IPost,
+  byId: {
+    [N: string]: IPost,
+  },
+  allIds: string[],
+  loading: boolean,
+  error: string,
 }
 
 interface IRootState {
@@ -39,7 +44,6 @@ interface IRootState {
     posts: IPostsData,
     users: IUsers,
   };
-  posts: string[];
 }
 
 export {

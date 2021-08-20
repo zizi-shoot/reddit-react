@@ -33,7 +33,7 @@ interface IActions {
   ACCOUNT_REQUEST_ERROR: IAccountRequestErrorAction,
 }
 
-type TActions = IActions[keyof IActions];
+type TAccountActions = IActions[keyof IActions];
 
 export {
   TAccountRequestErrorAction,
@@ -42,5 +42,5 @@ export {
   IAccountRequestAction,
   IAccountRequestSuccessAction,
   IAccountRequestErrorAction,
-  TActions,
+  TAccountActions,
 };

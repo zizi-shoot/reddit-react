@@ -1,11 +1,13 @@
 import { Reducer } from 'redux';
-import { IPost, IRootState } from '../types';
+import { IRootState } from '../types';
 import { ActionType } from './actions';
 import { AccountAction } from './account/actions';
 import { accountReducer } from './account/reducer';
 import { TokenAction } from './token/actions';
 import { tokenReducer } from './token/reducer';
 import { ITokenAction } from './token/types';
+import { PostsAction } from './posts/actions';
+import { postsReducer } from './posts/reducer';
 
 const initialState: IRootState = {
   token: {
@@ -19,10 +21,14 @@ const initialState: IRootState = {
   },
   comment: '',
   entities: {
-    posts: {},
+    posts: {
+      byId: {},
+      allIds: [],
+      loading: false,
+      error: '',
+    },
     users: {},
   },
-  posts: [],
 };
 
 const rootReducer: Reducer = (state = initialState, action) => {
@@ -32,13 +38,14 @@ const rootReducer: Reducer = (state = initialState, action) => {
         ...state,
         comment: action.text,
       };
-    case ActionType.SET_POSTS:
+    case PostsAction.REQUEST:
+    case PostsAction.REQUEST_SUCCESS:
+    case PostsAction.REQUEST_ERROR:
       return {
         ...state,
-        posts: action.posts.map((post: IPost) => post.id),
         entities: {
           ...state.entities,
-          posts: Object.fromEntries(action.posts.map((post: IPost) => [post.id, post])),
+          posts: postsReducer(state.entities.posts, action),
         },
       };
     case ActionType.SET_USER:

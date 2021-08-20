@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { AccountAction } from './actions';
-import { TActions } from './types';
+import { TAccountActions } from './types';
 import { IAccountData } from '../../types';
 
 const accountState: IAccountData = {
@@ -10,7 +10,7 @@ const accountState: IAccountData = {
   error: '',
 };
 
-const accountReducer: Reducer<IAccountData, TActions> = (state = accountState, action) => {
+const accountReducer: Reducer<IAccountData, TAccountActions> = (state = accountState, action) => {
   switch (action.type) {
     case AccountAction.REQUEST:
       return {

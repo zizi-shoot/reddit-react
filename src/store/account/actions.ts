@@ -41,8 +41,5 @@ const accountRequestAsync = (): TThunkAction => (dispatch, getState) => {
 
 export {
   AccountAction,
-  accountRequest,
-  accountRequestSuccess,
-  accountRequestError,
   accountRequestAsync,
 };
