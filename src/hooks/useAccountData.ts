@@ -15,7 +15,7 @@ export function useAccountData() {
   }, []);
 
   useEffect(() => {
-    if (!token) return;
+    if (token === 'undefined' || !token) return;
     dispatch(accountRequestAsync());
   }, [token]);
 
