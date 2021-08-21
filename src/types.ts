@@ -3,10 +3,12 @@ import { IToken } from './store/token/types';
 interface IUser {
   name: string,
   avatar: string,
+  loading: boolean,
+  error: string,
 }
 
 interface IUsers {
-  [N: string]: IUser,
+    [N: string]: IUser,
 }
 
 interface IAccountData {

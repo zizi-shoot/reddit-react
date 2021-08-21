@@ -8,6 +8,9 @@ import { tokenReducer } from './token/reducer';
 import { ITokenAction } from './token/types';
 import { PostsAction } from './posts/actions';
 import { postsReducer } from './posts/reducer';
+import { UserAction } from './users/actions';
+import { usersReducer } from './users/reducer';
+import { TUserActions } from './users/types';
 
 const initialState: IRootState = {
   token: {
@@ -33,10 +36,17 @@ const initialState: IRootState = {
 
 const rootReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.UPDATE_COMMENT:
+    case TokenAction.SAVE_TOKEN:
       return {
         ...state,
-        comment: action.text,
+        token: tokenReducer(state.token, <ITokenAction>action),
+      };
+    case AccountAction.REQUEST:
+    case AccountAction.REQUEST_SUCCESS:
+    case AccountAction.REQUEST_ERROR:
+      return {
+        ...state,
+        account: accountReducer(state.account, action),
       };
     case PostsAction.REQUEST:
     case PostsAction.REQUEST_SUCCESS:
@@ -48,28 +58,23 @@ const rootReducer: Reducer = (state = initialState, action) => {
           posts: postsReducer(state.entities.posts, action),
         },
       };
-    case ActionType.SET_USER:
+    case UserAction.REQUEST:
+    case UserAction.REQUEST_SUCCESS:
+    case UserAction.REQUEST_ERROR:
       return {
         ...state,
         entities: {
           ...state.entities,
           users: {
             ...state.entities.users,
-            [action.user.name]: action.user,
+            [action.name]: usersReducer(state.entities.users[action.name], <TUserActions>action),
           },
         },
       };
-    case AccountAction.REQUEST:
-    case AccountAction.REQUEST_SUCCESS:
-    case AccountAction.REQUEST_ERROR:
+    case ActionType.UPDATE_COMMENT:
       return {
         ...state,
-        account: accountReducer(state.account, action),
-      };
-    case TokenAction.SAVE_TOKEN:
-      return {
-        ...state,
-        token: tokenReducer(state.token, <ITokenAction>action),
+        comment: action.text,
       };
     default:
       return state;

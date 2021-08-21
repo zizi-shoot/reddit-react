@@ -23,7 +23,7 @@ const postsRequestError: ActionCreator<TPostsRequestErrorAction> = (error: strin
 });
 
 const postsRequestAsync = (): TThunkAction => (dispatch, getState) => {
-  if (!getState().token.value) return;
+  if (getState().token.value === 'undefined' || !getState().token.value) return;
   dispatch(postsRequest());
   axios
     .get(
