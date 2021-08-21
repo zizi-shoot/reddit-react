@@ -4,7 +4,6 @@ import styles from './post.scss';
 import { useCloseModal } from '../../../hooks/useCloseModal';
 import { CommentFormContainer } from './CommentFormContainer';
 import { CommentList } from './CommentList';
-import { TextContent } from '../TextContent';
 import { EIcons, Icon } from '../../Icon';
 import { generateId } from '../../../utils/react/generateRandomIndex';
 import { Controls } from '../CardsList/Card/Controls';
@@ -12,11 +11,12 @@ import { KarmaCounter } from '../CardsList/Card/KarmaCounter';
 import { Menu } from '../Menu';
 import menuStyles from '../Menu/menu.scss';
 import { focusContext } from '../../context';
+import { TextContentContainer } from '../TextContentContainer';
 
 const SUBCOMMENTS2 = [
   {
     author: 'NicholasL86',
-    created: '1626867392',
+    created: 1626867392,
     score: 88,
     partition: 'Лига консультантов',
   },
@@ -25,7 +25,7 @@ const SUBCOMMENTS2 = [
 const SUBCOMMENTS1 = [
   {
     author: 'Stunning-Tennis1808',
-    created: '1626882118',
+    created: 1626882118,
     score: 13,
     partition: 'Лига кадровиков',
     subitems: SUBCOMMENTS2,
@@ -35,26 +35,26 @@ const SUBCOMMENTS1 = [
 const COMMENTS = [
   {
     author: 'a_antoci',
-    created: '1626857334',
+    created: 1626857334,
     score: 55,
     partition: 'Лига юристов',
     subitems: SUBCOMMENTS1,
   },
   {
     author: 'sudofox',
-    created: '1626886322',
+    created: 1626886322,
     score: 3,
     partition: 'Лига политологов',
   },
   {
     author: 'beforesemicolon',
-    created: '1626888915',
+    created: 1626888915,
     score: 19,
     partition: 'Лига социологов',
   },
   {
     author: 'Bonteq',
-    created: '1626894007',
+    created: 1626894007,
     score: 14,
     partition: 'Лига экономистов',
     subitems: SUBCOMMENTS1,
@@ -122,10 +122,10 @@ export function Post({ onClose }: IPostProps) {
         </button>
       </header>
       <main className={styles.main}>
-        <TextContent
+        <TextContentContainer
           username="zizi_shoot"
           title="Следует отметить, что новая модель организационной деятельности поможет"
-          createdAt="1626569316"
+          createdAt={1626569316}
           extraClass={styles.textContent}
           isModal
         />

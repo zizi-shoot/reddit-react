@@ -1,58 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import axios from 'axios';
-import { RootState, setPosts } from '../../../store';
 import { CardsList } from '../CardsList';
-
-type TImgPreview = Array<string> | undefined;
-
-export interface IPostsData {
-  id: string,
-  author: string,
-  title: string,
-  imgPreview: TImgPreview,
-  createdUtc: string,
-  score: number,
-}
-
-export interface IResolutionItems {
-  [N: string]: string | number;
-}
-
-export interface IPost {
-  [N: string]: any;
-}
+import { IPostsData, IRootState } from '../../../types';
+import { postsRequestAsync } from '../../../store/posts/actions';
 
 export function CardsListContainer() {
-  const token = useSelector<RootState, string>((state) => state.userToken);
-  const posts = useSelector<RootState, IPostsData[]>((state) => state.posts);
+  const postsEntities = useSelector<IRootState, IPostsData['byId']>((state) => state.entities.posts.byId);
+  const postsOrder = useSelector<IRootState, string[]>((state) => state.entities.posts.allIds);
+  const posts = postsOrder?.map((item) => postsEntities[item]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get(
-        'https://oauth.reddit.com/best?raw_json=1',
-        { headers: { Authorization: `bearer ${token}` } },
-      )
-      .then((resp) => {
-        const postsData = resp.data.data.children;
-
-        dispatch(setPosts(postsData.map(({ data: post }: IPost) => {
-          const { id, author, title, created_utc: createdUtc, score } = post;
-          const imgPreview = post.preview?.images[0].resolutions
-            .map((item: IResolutionItems) => item.url);
-          return {
-            id,
-            author,
-            title,
-            createdUtc,
-            score,
-            imgPreview,
-          };
-        })));
-      })
-      .catch(console.log);
-  }, [token]);
+    dispatch(postsRequestAsync());
+  }, []);
 
   return (
     <CardsList posts={posts} />

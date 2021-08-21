@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { ChangeEvent, FormEvent } from 'react';
-import { RootState, updateComment } from '../../../../store';
 import { CommentForm } from '../CommentForm';
+import { IRootState } from '../../../../types';
+import { updateComment } from '../../../../store/actions';
 
 interface Props {
   isFocused: boolean,
@@ -11,7 +12,7 @@ interface Props {
 
 export function CommentFormContainer({ isFocused, onBlur, extraClass }: Props) {
   const dispatch = useDispatch();
-  const value = useSelector<RootState, string>((state) => state.commentText);
+  const value = useSelector<IRootState, string>((state) => state.comment);
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
     dispatch(updateComment(event.target.value));

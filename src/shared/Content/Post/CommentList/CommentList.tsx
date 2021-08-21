@@ -1,16 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './commentlist.scss';
-import { TextContent } from '../../TextContent';
 import { Controls } from '../../CardsList/Card/Controls';
 import { KarmaCounter } from '../../CardsList/Card/KarmaCounter';
 import { Comment } from './Comment';
 import { CommentMenu } from './Comment/CommentMenu';
+import { TextContentContainer } from '../../TextContentContainer';
 
 interface ICommentItem {
   id: string,
   author: string,
-  created: string,
+  created: number,
   score: number,
   subitems?: ICommentItem[],
   partition?: string,
@@ -36,7 +36,7 @@ export function CommentList({ items, extraClass }: ICommentListProps) {
           partition,
         }) => (
           <Comment key={id}>
-            <TextContent
+            <TextContentContainer
               username={author}
               createdAt={created}
               partition={partition}
