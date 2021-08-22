@@ -8,6 +8,7 @@ export function CardsListContainer() {
   const postsEntities = useSelector<IRootState, IPostsData['byId']>((state) => state.entities.posts.byId);
   const postsOrder = useSelector<IRootState, string[]>((state) => state.entities.posts.allIds);
   const posts = postsOrder?.map((item) => postsEntities[item]);
+  const isLoading = useSelector<IRootState, boolean>((state) => state.entities.posts.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,6 +16,6 @@ export function CardsListContainer() {
   }, []);
 
   return (
-    <CardsList posts={posts} />
+    <CardsList posts={posts} isLoading={isLoading} />
   );
 }

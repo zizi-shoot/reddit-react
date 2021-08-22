@@ -6,6 +6,7 @@ import 'dayjs/locale/ru';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import styles from './textcontent.scss';
 import { Post } from '../Post';
+import { EIcons, Icon } from '../../Icon';
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
@@ -18,6 +19,7 @@ interface ITextContentProps {
   partition?: string,
   extraClass?: string,
   isModal?: boolean,
+  isLoading: boolean,
 }
 
 export function TextContent(props: ITextContentProps) {
@@ -29,6 +31,7 @@ export function TextContent(props: ITextContentProps) {
     partition,
     extraClass,
     isModal = false,
+    isLoading = false,
   } = props;
   const timeDiff = dayjs(createdAt * 1000).fromNow();
   const modal = document.getElementById('modal');
@@ -61,11 +64,17 @@ export function TextContent(props: ITextContentProps) {
           )
         }
         <div className={styles.metaLink}>
-          <img
-            src={avatar}
-            alt="avatar"
-            className={styles.metaAvatar}
-          />
+          {
+            isLoading
+              ? <Icon name={EIcons.anon} size={20} extraClass={styles.metaDownload} />
+              : (
+                <img
+                  src={avatar}
+                  alt="avatar"
+                  className={styles.metaAvatar}
+                />
+              )
+          }
           <a href="#user-url" className={styles.metaUsername}>{username}</a>
         </div>
         <span className={styles.createdAt}>

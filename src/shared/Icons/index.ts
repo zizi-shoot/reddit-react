@@ -9,3 +9,4 @@ export * from './KarmaDownIcon';
 export * from './AnonIcon';
 export * from './ArrowBackIcon';
 export * from './ActionsBtnIcon';
+export * from './DownloadIcon';

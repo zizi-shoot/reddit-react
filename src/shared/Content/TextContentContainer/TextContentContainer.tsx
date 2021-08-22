@@ -25,6 +25,7 @@ export function TextContentContainer(props: ITextContentProps) {
   } = props;
   const token = useSelector<IRootState, IToken['value']>((state) => state.token.value);
   const users = useSelector<IRootState, IUsers>((state) => state.entities.users);
+  const isLoading = useSelector<IRootState, boolean>((state) => state.entities.users[username]?.loading);
   const avatar = users[username]?.avatar;
   const dispatch = useDispatch();
 
@@ -44,6 +45,7 @@ export function TextContentContainer(props: ITextContentProps) {
           partition={partition}
           extraClass={extraClass}
           isModal={isModal}
+          isLoading={isLoading}
         />
       )
       : null
