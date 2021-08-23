@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './commentmenu.scss';
 import { EIcons, Icon } from '../../../../../Icon';
-import { focusContext } from '../../../../../context';
 import { updateComment } from '../../../../../../store/actions';
 
 interface ICommentMenuProps {
@@ -11,17 +10,11 @@ interface ICommentMenuProps {
 
 export function CommentMenu({ author }: ICommentMenuProps) {
   const dispatch = useDispatch();
-  const { onClick } = useContext(focusContext);
-
-  function handleClick() {
-    dispatch(updateComment(`${author}, `));
-    onClick(true);
-  }
 
   return (
     <ul className={styles.list}>
       <li className={styles.item}>
-        <button type="button" onClick={handleClick}>
+        <button type="button" onClick={() => dispatch(updateComment(`${author}, `))}>
           <Icon name={EIcons.comments} size={14} mobileSize={12} />
           Ответить
         </button>

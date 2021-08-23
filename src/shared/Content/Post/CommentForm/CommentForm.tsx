@@ -1,10 +1,15 @@
-import React, { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { ChangeEvent, useEffect } from 'react';
 import classNames from 'classnames';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './commentform.scss';
 import actionsStyles from './FormActions/formactions.scss';
 import { EIcons, Icon } from '../../../Icon';
 import { FormActions } from './FormActions';
 import { generateId } from '../../../../utils/react/generateRandomIndex';
+import { updateComment } from '../../../../store/actions';
+import { IRootState } from '../../../../types';
 
 const items = [
   {
@@ -119,44 +124,46 @@ const items = [
 
 interface ICommentFormProps {
   extraClass?: string,
-  isFocused: boolean,
-  value: string,
-  onBlur: () => void,
-  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
-  onSubmit: (event: FormEvent) => void,
 }
 
-export function CommentForm(props: ICommentFormProps) {
-  const {
-    extraClass,
-    isFocused,
-    onBlur,
-    onSubmit,
-    onChange,
-    value,
-  } = props;
-  const textRef = useRef<HTMLTextAreaElement>(null);
+interface IForm {
+  comment: string,
+}
+
+export function CommentForm({ extraClass }: ICommentFormProps) {
   const classes = classNames(styles.container, extraClass);
+  const value = useSelector<IRootState, string>((state) => state.comment);
+  const dispatch = useDispatch();
+  const { register, handleSubmit, setValue, setFocus, formState: { errors } } = useForm<IForm>();
+  const onSubmit: SubmitHandler<IForm> = () => {
+    alert('Комментарий добавлен');
+    dispatch(updateComment(''));
+  };
+
+  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    dispatch(updateComment(event.target.value));
+  }
 
   useEffect(() => {
-    if (isFocused) textRef.current?.focus();
-  }, [isFocused]);
+    setValue('comment', value);
+    setFocus('comment');
+  }, [value, setFocus]);
 
   return (
-    <form className={classes} onSubmit={onSubmit}>
+    <form className={classes} onSubmit={handleSubmit(onSubmit)}>
       <button className={styles.actionsBtn} type="submit">
         <Icon name={EIcons.actions} size={20} />
       </button>
       <textarea
-        ref={textRef}
+        {...register('comment', { required: true, minLength: 3 })}
         className={styles.area}
         name="comment"
         id="comment"
         placeholder="Ваш комментарий"
         value={value}
-        onChange={onChange}
-        onBlur={onBlur}
+        onChange={handleChange}
       />
+      {errors.comment && <span className={styles.error}>Заполните комментарий (минимум 3 символа)</span>}
       <button className={styles.emojiBtn} type="submit">
         <Icon name={EIcons.emoji} size={20} />
       </button>

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.scss';
 import { useCloseModal } from '../../../hooks/useCloseModal';
-import { CommentFormContainer } from './CommentFormContainer';
 import { CommentList } from './CommentList';
 import { EIcons, Icon } from '../../Icon';
 import { generateId } from '../../../utils/react/generateRandomIndex';
@@ -10,8 +9,8 @@ import { Controls } from '../CardsList/Card/Controls';
 import { KarmaCounter } from '../CardsList/Card/KarmaCounter';
 import { Menu } from '../Menu';
 import menuStyles from '../Menu/menu.scss';
-import { focusContext } from '../../context';
 import { TextContentContainer } from '../TextContentContainer';
+import { CommentForm } from './CommentForm';
 
 const SUBCOMMENTS2 = [
   {
@@ -100,13 +99,6 @@ interface IPostProps {
 
 export function Post({ onClose }: IPostProps) {
   const ref = useCloseModal({ onClose });
-  const [isFocused, setIsFocused] = useState(false);
-  const FocusProvider = focusContext.Provider;
-
-  function handleBlur() {
-    setIsFocused(false);
-  }
-
   const modal = document.getElementById('modal');
   if (!modal) return null;
 
@@ -138,23 +130,15 @@ export function Post({ onClose }: IPostProps) {
           <KarmaCounter karma={12} />
         </Controls>
         <div className={styles.sort}>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="sortBtn" className={styles.sortLabel}>Сортировать по:</label>
           <button type="button" id="sortBtn" className={styles.sortBtn}>Лучшие</button>
         </div>
         <Menu items={MENU_ITEMS} extraClass={styles.menu} />
-        <CommentFormContainer
+        <CommentForm
           extraClass={styles.commentForm}
-          isFocused={isFocused}
-          onBlur={handleBlur}
         />
-        <FocusProvider
-          value={{
-            value: isFocused,
-            onClick: setIsFocused,
-          }}
-        >
-          <CommentList items={COMMENTS} extraClass={styles.commentList} />
-        </FocusProvider>
+        <CommentList items={COMMENTS} extraClass={styles.commentList} />
       </main>
     </article>
   ), modal);

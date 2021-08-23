@@ -2,6 +2,7 @@
   display: flex;
   gap: 10px;
   padding: 0 20px;
+  position: relative;
 }
 
 .area {
@@ -21,6 +22,12 @@
 .actions {
   display: none;
   background-color: var(--greyE5);
+}
+
+.error {
+  position: absolute;
+  color: #f00;
+  top: -1.5em;
 }
 
 @media all and (min-width: 1024px) {
