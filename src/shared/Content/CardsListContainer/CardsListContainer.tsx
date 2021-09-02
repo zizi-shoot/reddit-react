@@ -1,21 +1,34 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { CardsList } from '../CardsList';
 import { IPostsData, IRootState } from '../../../types';
 import { postsRequestAsync } from '../../../store/posts/actions';
+import { CardsList } from '../CardsList';
 
 export function CardsListContainer() {
-  const postsEntities = useSelector<IRootState, IPostsData['byId']>((state) => state.entities.posts.byId);
-  const postsOrder = useSelector<IRootState, string[]>((state) => state.entities.posts.allIds);
-  const posts = postsOrder?.map((item) => postsEntities[item]);
+  const {
+    byId: postsData,
+    allIds: postsOrder,
+    error: errorLoading,
+  } = useSelector<IRootState, IPostsData>((state) => state.entities.posts);
+  const posts = postsOrder?.map((item) => postsData[item]);
   const isLoading = useSelector<IRootState, boolean>((state) => state.entities.posts.loading);
   const dispatch = useDispatch();
+  const token = useSelector<IRootState>((state) => state.token.value);
 
   useEffect(() => {
+    if (!token || token === 'undefined') return;
     dispatch(postsRequestAsync());
-  }, []);
+  }, [token]);
 
   return (
-    <CardsList posts={posts} isLoading={isLoading} />
+    <>
+      {token === 'undefined' || !token
+        ? (
+          <p style={{ padding: 40, fontSize: 18, textAlign: 'center' }}>
+            Авторизуйтесь, чтобы загрузить посты
+          </p>
+        )
+        : <CardsList posts={posts} isLoading={isLoading} errorLoading={errorLoading} />}
+    </>
   );
 }

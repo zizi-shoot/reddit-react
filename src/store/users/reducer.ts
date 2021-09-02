@@ -16,6 +16,7 @@ const usersReducer: Reducer<IUser, TUserActions> = (state = userState, action) =
       return {
         ...state,
         loading: true,
+        error: '',
       };
     case UserAction.REQUEST_SUCCESS:
       return {

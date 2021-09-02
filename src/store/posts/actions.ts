@@ -22,34 +22,25 @@ const postsRequestError: ActionCreator<TPostsRequestErrorAction> = (error: strin
   error,
 });
 
-const postsRequestAsync = (): TThunkAction => (dispatch, getState) => {
+const postsRequestAsync = (): TThunkAction => async (dispatch, getState) => {
   if (getState().token.value === 'undefined' || !getState().token.value) return;
-  dispatch(postsRequest());
-  axios
-    .get(
+
+  try {
+    dispatch(postsRequest());
+
+    const { data: { data: { children: postsData } } } = await axios.get(
       'https://oauth.reddit.com/best?raw_json=1',
       { headers: { Authorization: `bearer ${getState().token.value}` } },
-    )
-    .then((resp) => {
-      const postsData = resp.data.data.children;
-      dispatch(postsRequestSuccess(postsData.map(({ data: post }: IPostAPI) => {
-        const { id, author, title, created_utc: createdUtc, score } = post;
-        const imgPreview = post.preview?.images[0].resolutions
-          .map((item: IResolutionItems) => item.url);
-        return {
-          id,
-          author,
-          title,
-          createdUtc,
-          score,
-          imgPreview,
-        };
-      })));
-    })
-    .catch((error) => {
-      console.log(error);
-      dispatch(postsRequestError(error));
-    });
+    );
+    dispatch(postsRequestSuccess(postsData.map(({ data: post }: IPostAPI) => {
+      const { id, author, title, created_utc: createdUtc, score } = post;
+      const imgPreview = post.preview?.images[0].resolutions.map((item: IResolutionItems) => item.url);
+
+      return { id, author, title, createdUtc, score, imgPreview };
+    })));
+  } catch (error) {
+    dispatch(postsRequestError(String(error)));
+  }
 };
 
 export {

@@ -16,6 +16,7 @@ const accountReducer: Reducer<IAccountData, TAccountActions> = (state = accountS
       return {
         ...state,
         loading: true,
+        error: '',
       };
     case AccountAction.REQUEST_SUCCESS:
       return {

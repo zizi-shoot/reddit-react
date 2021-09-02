@@ -7,7 +7,7 @@ import { Account } from './Account';
 import { useAccountData } from '../../hooks/useAccountData';
 
 export function Header() {
-  const { accountData, loading } = useAccountData();
+  const { accountData } = useAccountData();
 
   return (
     <header className={styles.container}>
@@ -15,7 +15,7 @@ export function Header() {
         <Account
           avatarSrc={accountData.avatar}
           username={accountData.name}
-          loading={loading}
+          loading={accountData.loading}
           extraClass={styles.account}
         />
         <Search />

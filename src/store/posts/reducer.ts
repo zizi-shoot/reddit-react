@@ -16,6 +16,7 @@ const postsReducer: Reducer<IPostsData, TPostsActions> = (state = postsState, ac
       return {
         ...state,
         loading: true,
+        error: '',
       };
     case PostsAction.REQUEST_SUCCESS:
       return {

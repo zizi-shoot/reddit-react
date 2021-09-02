@@ -25,21 +25,20 @@ const userRequestError: ActionCreator<TUserRequestErrorAction> = (name: string, 
   error,
 });
 
-const userRequestAsync = (username: string): TThunkAction => (dispatch, getState) => {
+const userRequestAsync = (username: string): TThunkAction => async (dispatch, getState) => {
   if (getState().token.value === 'undefined' || !getState().token.value) return;
-  dispatch(userRequest(username));
-  axios
-    .get(
+  try {
+    dispatch(userRequest(username));
+
+    const { data: { data: { icon_img: avatar } } } = await axios.get(
       `https://oauth.reddit.com/user/${username}/about?raw_json=1`,
       { headers: { Authorization: `bearer ${getState().token.value}` } },
-    )
-    .then((resp) => {
-      dispatch(userRequestSuccess(username, { name: username, avatar: resp.data.data.icon_img }));
-    })
-    .catch((error) => {
-      console.log(error);
-      dispatch(userRequestError(username, error));
-    });
+    );
+
+    dispatch(userRequestSuccess(username, { name: username, avatar }));
+  } catch (error) {
+    dispatch(userRequestError(username, String(error)));
+  }
 };
 
 export { UserAction, userRequestAsync };

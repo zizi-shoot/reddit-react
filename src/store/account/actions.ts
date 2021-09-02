@@ -22,21 +22,18 @@ const accountRequestError: ActionCreator<TAccountRequestErrorAction> = (error: s
   error,
 });
 
-const accountRequestAsync = (): TThunkAction => (dispatch, getState) => {
-  dispatch(accountRequest());
-  axios
-    .get(
+const accountRequestAsync = (): TThunkAction => async (dispatch, getState) => {
+  if (getState().token.value === 'undefined' || !getState().token.value) return;
+  try {
+    dispatch(accountRequest());
+    const { data } = await axios.get(
       'https://oauth.reddit.com/api/v1/me?raw_json=1',
       { headers: { Authorization: `bearer ${getState().token.value}` } },
-    )
-    .then((resp) => {
-      const { data } = resp;
-      dispatch(accountRequestSuccess({ name: data.name, avatar: data.icon_img }));
-    })
-    .catch((error) => {
-      console.log(error);
-      dispatch(accountRequestError(error));
-    });
+    );
+    dispatch(accountRequestSuccess({ name: data.name, avatar: data.icon_img }));
+  } catch (error) {
+    dispatch(accountRequestError(String(error)));
+  }
 };
 
 export {
