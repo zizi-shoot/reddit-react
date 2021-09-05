@@ -27,6 +27,7 @@ const initialState: IRootState = {
     posts: {
       byId: {},
       allIds: [],
+      after: '',
       loading: false,
       error: '',
     },

@@ -13,8 +13,9 @@ enum PostsAction {
 const postsRequest: ActionCreator<TPostsRequestAction> = () => ({
   type: PostsAction.REQUEST,
 });
-const postsRequestSuccess: ActionCreator<TPostsRequestSuccessAction> = (posts: IPost[]) => ({
+const postsRequestSuccess: ActionCreator<TPostsRequestSuccessAction> = (after: string, posts: IPost[]) => ({
   type: PostsAction.REQUEST_SUCCESS,
+  after,
   posts,
 });
 const postsRequestError: ActionCreator<TPostsRequestErrorAction> = (error: string) => ({
@@ -24,15 +25,22 @@ const postsRequestError: ActionCreator<TPostsRequestErrorAction> = (error: strin
 
 const postsRequestAsync = (): TThunkAction => async (dispatch, getState) => {
   if (getState().token.value === 'undefined' || !getState().token.value) return;
+  const nextAfter = getState().entities.posts.after;
 
   try {
     dispatch(postsRequest());
 
-    const { data: { data: { children: postsData } } } = await axios.get(
+    const { data: { data: { after, children: postsData } } } = await axios.get(
       'https://oauth.reddit.com/best?raw_json=1',
-      { headers: { Authorization: `bearer ${getState().token.value}` } },
+      {
+        headers: { Authorization: `bearer ${getState().token.value}` },
+        params: {
+          limit: 10,
+          after: nextAfter,
+        },
+      },
     );
-    dispatch(postsRequestSuccess(postsData.map(({ data: post }: IPostAPI) => {
+    dispatch(postsRequestSuccess(after, postsData.map(({ data: post }: IPostAPI) => {
       const { id, author, title, created_utc: createdUtc, score } = post;
       const imgPreview = post.preview?.images[0].resolutions.map((item: IResolutionItems) => item.url);
 

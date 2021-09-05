@@ -18,6 +18,7 @@ interface IPostsRequestAction {
 interface IPostsRequestSuccessAction {
   type: PostsAction.REQUEST_SUCCESS,
   posts: IPost[],
+  after: string,
 }
 
 interface IPostsRequestErrorAction {

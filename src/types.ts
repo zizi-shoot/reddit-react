@@ -8,7 +8,7 @@ interface IUser {
 }
 
 interface IUsers {
-    [N: string]: IUser,
+  [N: string]: IUser,
 }
 
 interface IAccountData {
@@ -34,6 +34,7 @@ interface IPostsData {
     [N: string]: IPost,
   },
   allIds: string[],
+  after: string,
   loading: boolean,
   error: string,
 }

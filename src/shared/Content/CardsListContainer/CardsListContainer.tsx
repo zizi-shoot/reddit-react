@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { IPostsData, IRootState } from '../../../types';
 import { postsRequestAsync } from '../../../store/posts/actions';
 import { CardsList } from '../CardsList';
@@ -15,10 +14,10 @@ export function CardsListContainer() {
   const dispatch = useDispatch();
   const token = useSelector<IRootState>((state) => state.token.value);
 
-  useEffect(() => {
+  function intersectHandler() {
     if (!token || token === 'undefined') return;
     dispatch(postsRequestAsync());
-  }, [token]);
+  }
 
   return (
     <>
@@ -28,7 +27,7 @@ export function CardsListContainer() {
             Авторизуйтесь, чтобы загрузить посты
           </p>
         )
-        : <CardsList posts={posts} isLoading={isLoading} errorLoading={errorLoading} />}
+        : <CardsList posts={posts} isLoading={isLoading} errorLoading={errorLoading} onIntersect={intersectHandler} />}
     </>
   );
 }
