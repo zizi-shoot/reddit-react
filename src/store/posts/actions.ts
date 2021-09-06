@@ -57,7 +57,7 @@ const postsRequestAsync = (): TThunkAction => async (dispatch, getState) => {
 
       return { id, author, title, createdUtc, score, imgPreview };
     })));
-    if (getState().entities.posts.requestCount === 2) dispatch(postsRequestReset());
+    if (getState().entities.posts.requestCount === 3) dispatch(postsRequestReset());
     dispatch(postsRequestIncrement());
   } catch (error) {
     dispatch(postsRequestError(String(error)));

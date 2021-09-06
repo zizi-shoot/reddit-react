@@ -9,7 +9,7 @@ export const postsState: IPostsData = {
   after: '',
   loading: false,
   error: '',
-  requestCount: -1,
+  requestCount: 0,
 };
 
 const postsReducer: Reducer<IPostsData, TPostsActions> = (state = postsState, action) => {

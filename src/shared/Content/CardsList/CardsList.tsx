@@ -31,7 +31,7 @@ export function CardsList(props: IProps) {
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && count !== 2) {
+      if (entries[0].isIntersecting && count !== 3) {
         loadData();
       }
     }, { rootMargin: '10px' });
@@ -93,7 +93,7 @@ export function CardsList(props: IProps) {
           </p>
         )}
       </ul>
-      {count === 2
+      {count === 3
       && (
         <button
           type="button"
