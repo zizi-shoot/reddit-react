@@ -2,35 +2,22 @@ import { Reducer } from 'redux';
 import { IRootState } from '../types';
 import { ActionType } from './actions';
 import { AccountAction } from './account/actions';
-import { accountReducer } from './account/reducer';
+import { accountReducer, accountState } from './account/reducer';
 import { TokenAction } from './token/actions';
-import { tokenReducer } from './token/reducer';
+import { tokenReducer, tokenState } from './token/reducer';
 import { ITokenAction } from './token/types';
 import { PostsAction } from './posts/actions';
-import { postsReducer } from './posts/reducer';
+import { postsReducer, postsState } from './posts/reducer';
 import { UserAction } from './users/actions';
 import { usersReducer } from './users/reducer';
 import { TUserActions } from './users/types';
 
 const initialState: IRootState = {
-  token: {
-    value: '',
-  },
-  account: {
-    avatar: '',
-    name: '',
-    loading: false,
-    error: '',
-  },
+  token: tokenState,
+  account: accountState,
   comment: '',
   entities: {
-    posts: {
-      byId: {},
-      allIds: [],
-      after: '',
-      loading: false,
-      error: '',
-    },
+    posts: postsState,
     users: {},
   },
 };
@@ -52,6 +39,8 @@ const rootReducer: Reducer = (state = initialState, action) => {
     case PostsAction.REQUEST:
     case PostsAction.REQUEST_SUCCESS:
     case PostsAction.REQUEST_ERROR:
+    case PostsAction.REQUEST_INCREMENT:
+    case PostsAction.REQUEST_RESET:
       return {
         ...state,
         entities: {

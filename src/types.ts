@@ -37,6 +37,7 @@ interface IPostsData {
   after: string,
   loading: boolean,
   error: string,
+  requestCount: number,
 }
 
 interface IRootState {

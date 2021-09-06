@@ -3,7 +3,7 @@ import { AccountAction } from './actions';
 import { TAccountActions } from './types';
 import { IAccountData } from '../../types';
 
-const accountState: IAccountData = {
+export const accountState: IAccountData = {
   avatar: '',
   name: '',
   loading: false,

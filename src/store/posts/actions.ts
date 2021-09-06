@@ -1,6 +1,6 @@
 import { ActionCreator } from 'redux';
 import axios from 'axios';
-import { IPostAPI, IResolutionItems, TPostsRequestAction, TPostsRequestErrorAction, TPostsRequestSuccessAction } from './types';
+import { IPostAPI, IResolutionItems, TPostsRequestAction, TPostsRequestErrorAction, TPostsRequestIncrementAction, TPostsRequestResetAction, TPostsRequestSuccessAction } from './types';
 import { IPost } from '../../types';
 import { TThunkAction } from '../types';
 
@@ -8,6 +8,8 @@ enum PostsAction {
   REQUEST = 'POSTS_REQUEST',
   REQUEST_SUCCESS = 'POSTS_REQUEST_SUCCESS',
   REQUEST_ERROR = 'POSTS_REQUEST_ERROR',
+  REQUEST_INCREMENT = 'POSTS_REQUEST_INCREMENT',
+  REQUEST_RESET = 'POSTS_REQUEST_RESET',
 }
 
 const postsRequest: ActionCreator<TPostsRequestAction> = () => ({
@@ -23,6 +25,14 @@ const postsRequestError: ActionCreator<TPostsRequestErrorAction> = (error: strin
   error,
 });
 
+const postsRequestIncrement: ActionCreator<TPostsRequestIncrementAction> = () => ({
+  type: PostsAction.REQUEST_INCREMENT,
+});
+
+const postsRequestReset: ActionCreator<TPostsRequestResetAction> = () => ({
+  type: PostsAction.REQUEST_RESET,
+});
+
 const postsRequestAsync = (): TThunkAction => async (dispatch, getState) => {
   if (getState().token.value === 'undefined' || !getState().token.value) return;
   const nextAfter = getState().entities.posts.after;
@@ -31,10 +41,11 @@ const postsRequestAsync = (): TThunkAction => async (dispatch, getState) => {
     dispatch(postsRequest());
 
     const { data: { data: { after, children: postsData } } } = await axios.get(
-      'https://oauth.reddit.com/best?raw_json=1',
+      'https://oauth.reddit.com/top?raw_json=1',
       {
         headers: { Authorization: `bearer ${getState().token.value}` },
         params: {
+          t: 'week',
           limit: 10,
           after: nextAfter,
         },
@@ -46,6 +57,8 @@ const postsRequestAsync = (): TThunkAction => async (dispatch, getState) => {
 
       return { id, author, title, createdUtc, score, imgPreview };
     })));
+    if (getState().entities.posts.requestCount === 2) dispatch(postsRequestReset());
+    dispatch(postsRequestIncrement());
   } catch (error) {
     dispatch(postsRequestError(String(error)));
   }
@@ -53,5 +66,7 @@ const postsRequestAsync = (): TThunkAction => async (dispatch, getState) => {
 
 export {
   PostsAction,
+  postsRequestIncrement,
+  postsRequestReset,
   postsRequestAsync,
 };

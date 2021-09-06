@@ -2,7 +2,7 @@ import { Reducer } from 'redux';
 import { IToken, ITokenAction } from './types';
 import { TokenAction } from './actions';
 
-const tokenState: IToken = {
+export const tokenState: IToken = {
   value: '',
 };
 

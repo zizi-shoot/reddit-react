@@ -3,12 +3,13 @@ import { IPost, IPostsData } from '../../types';
 import { TPostsActions } from './types';
 import { PostsAction } from './actions';
 
-const postsState: IPostsData = {
+export const postsState: IPostsData = {
   byId: {},
   allIds: [],
   after: '',
   loading: false,
   error: '',
+  requestCount: -1,
 };
 
 const postsReducer: Reducer<IPostsData, TPostsActions> = (state = postsState, action) => {
@@ -38,6 +39,16 @@ const postsReducer: Reducer<IPostsData, TPostsActions> = (state = postsState, ac
         ...state,
         error: action.error,
         loading: false,
+      };
+    case PostsAction.REQUEST_INCREMENT:
+      return {
+        ...state,
+        requestCount: state.requestCount + 1,
+      };
+    case PostsAction.REQUEST_RESET:
+      return {
+        ...state,
+        requestCount: 0,
       };
     default:
       return state;

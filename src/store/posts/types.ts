@@ -11,6 +11,14 @@ type TPostsRequestErrorAction = {
   type: typeof PostsAction.REQUEST_ERROR,
 }
 
+type TPostsRequestIncrementAction = {
+  type: typeof PostsAction.REQUEST_INCREMENT,
+}
+
+type TPostsRequestResetAction = {
+  type: typeof PostsAction.REQUEST_RESET,
+}
+
 interface IPostsRequestAction {
   type: PostsAction.REQUEST,
 }
@@ -26,10 +34,20 @@ interface IPostsRequestErrorAction {
   error: string
 }
 
+interface IPostsRequestIncrementAction {
+  type: PostsAction.REQUEST_INCREMENT,
+}
+
+interface IPostsRequestResetAction {
+  type: PostsAction.REQUEST_RESET,
+}
+
 interface IActions {
   REQUEST: IPostsRequestAction,
   REQUEST_SUCCESS: IPostsRequestSuccessAction,
   REQUEST_ERROR: IPostsRequestErrorAction,
+  REQUEST_INCREMENT: IPostsRequestIncrementAction,
+  REQUEST_RESET: IPostsRequestResetAction,
 }
 
 type TPostsActions = IActions[keyof IActions];
@@ -46,9 +64,13 @@ export {
   TPostsRequestAction,
   TPostsRequestSuccessAction,
   TPostsRequestErrorAction,
+  TPostsRequestIncrementAction,
+  TPostsRequestResetAction,
   IPostsRequestAction,
   IPostsRequestSuccessAction,
   IPostsRequestErrorAction,
+  IPostsRequestIncrementAction,
+  IPostsRequestResetAction,
   TPostsActions,
   IPostAPI,
   IResolutionItems,

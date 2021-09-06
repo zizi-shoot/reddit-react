@@ -8,6 +8,7 @@ export function CardsListContainer() {
     byId: postsData,
     allIds: postsOrder,
     error: errorLoading,
+    requestCount,
   } = useSelector<IRootState, IPostsData>((state) => state.entities.posts);
   const posts = postsOrder?.map((item) => postsData[item]);
   const isLoading = useSelector<IRootState, boolean>((state) => state.entities.posts.loading);
@@ -27,7 +28,15 @@ export function CardsListContainer() {
             Авторизуйтесь, чтобы загрузить посты
           </p>
         )
-        : <CardsList posts={posts} isLoading={isLoading} errorLoading={errorLoading} onIntersect={intersectHandler} />}
+        : (
+          <CardsList
+            posts={posts}
+            isLoading={isLoading}
+            errorLoading={errorLoading}
+            loadData={intersectHandler}
+            count={requestCount}
+          />
+        )}
     </>
   );
 }

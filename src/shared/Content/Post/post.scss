@@ -142,10 +142,10 @@
   }
 
   .textContent {
-    position: relative;
     @include reset-side-padding;
-    order: 0;
+    position: relative;
     flex-basis: unset;
+    order: 0;
   }
 
   .sort {
@@ -172,12 +172,12 @@
   }
 
   .menu {
+    position: static;
     display: block;
     align-items: center;
     order: 2;
-    position: static;
-    box-shadow: none;
     margin-bottom: 20px;
+    box-shadow: none;
 
     ul {
       display: flex;
