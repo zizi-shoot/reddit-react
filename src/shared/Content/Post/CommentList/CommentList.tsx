@@ -37,6 +37,7 @@ export function CommentList({ items, extraClass }: ICommentListProps) {
         }) => (
           <Comment key={id}>
             <TextContentContainer
+              id={id}
               username={author}
               createdAt={created}
               partition={partition}

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
-import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { Link } from 'react-router-dom';
 import styles from './textcontent.scss';
-import { Post } from '../Post';
 import { EIcons, Icon } from '../../Icon';
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
 
 interface ITextContentProps {
+  id?: string,
   username: string,
   avatar: string,
   createdAt: number,
@@ -24,6 +24,7 @@ interface ITextContentProps {
 
 export function TextContent(props: ITextContentProps) {
   const {
+    id,
     username,
     avatar,
     createdAt,
@@ -34,23 +35,7 @@ export function TextContent(props: ITextContentProps) {
     isLoading = false,
   } = props;
   const timeDiff = dayjs(createdAt * 1000).fromNow();
-  const modal = document.getElementById('modal');
   const classes = classNames(extraClass, styles.container);
-  const [isModalOpened, setIsModalOpened] = useState(false);
-
-  function handleClick() {
-    if (isModal) return;
-    setIsModalOpened(true);
-    modal?.classList.toggle('post--hidden');
-    if (modal) disableBodyScroll(modal);
-  }
-
-  function handleClose() {
-    setIsModalOpened(false);
-    modal?.classList.toggle('post--hidden');
-    if (modal) enableBodyScroll(modal);
-    clearAllBodyScrollLocks();
-  }
 
   return (
     <div className={classes}>
@@ -86,13 +71,18 @@ export function TextContent(props: ITextContentProps) {
         title
         && (
           <h2 className={styles.title}>
-            <button type="button" className={styles.titleBtn} onClick={handleClick}>{title}</button>
+            {isModal
+              ? title
+              : (
+                <Link
+                  to={`/posts/${id}/${title.split(' ').splice(0, 10).join('_')}`}
+                  className={styles.titleLink}
+                >
+                  {title}
+                </Link>
+              )}
           </h2>
         )
-      }
-      {
-        isModalOpened
-        && <Post onClose={handleClose} />
       }
     </div>
   );

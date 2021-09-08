@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { useHistory } from 'react-router-dom';
 import styles from './post.scss';
 import { useCloseModal } from '../../../hooks/useCloseModal';
 import { CommentList } from './CommentList';
@@ -93,13 +95,23 @@ const MENU_ITEMS = [
   },
 ].map(generateId);
 
-interface IPostProps {
-  onClose?: () => void;
-}
-
-export function Post({ onClose }: IPostProps) {
+export function Post() {
   const ref = useCloseModal({ onClose });
   const modal = document.getElementById('modal');
+  const history = useHistory();
+
+  function onClose() {
+    history.push('/');
+    modal?.classList.toggle('post--hidden');
+    if (modal) enableBodyScroll(modal);
+    clearAllBodyScrollLocks();
+  }
+
+  useEffect(() => {
+    modal?.classList.toggle('post--hidden');
+    if (modal) disableBodyScroll(modal);
+  }, []);
+
   if (!modal) return null;
 
   return ReactDOM.createPortal((

@@ -6,6 +6,7 @@ import { IToken } from '../../../store/token/types';
 import { userRequestAsync } from '../../../store/users/actions';
 
 interface ITextContentProps {
+  id?: string,
   username: string,
   createdAt: number,
   title?: string,
@@ -16,6 +17,7 @@ interface ITextContentProps {
 
 export function TextContentContainer(props: ITextContentProps) {
   const {
+    id,
     username,
     createdAt,
     title,
@@ -38,6 +40,7 @@ export function TextContentContainer(props: ITextContentProps) {
     token
       ? (
         <TextContent
+          id={id}
           username={username}
           avatar={avatar}
           createdAt={createdAt}

@@ -65,6 +65,7 @@ export function CardsList(props: IProps) {
         }) => (
           <Card key={id}>
             <TextContentContainer
+              id={id}
               username={author}
               title={title}
               createdAt={createdUtc}

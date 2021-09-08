@@ -61,12 +61,13 @@
   font-size: 16px;
   line-height: 19px;
 
-  &Btn {
+  &Link {
     display: box;
     overflow: hidden;
     font-size: 16px;
     line-height: 19px;
     text-align: left;
+    color: var(--black);
     -webkit-line-clamp: 2;
     box-orient: vertical;
   }
@@ -103,7 +104,7 @@
     font-size: 20px;
     line-height: 23px;
 
-    &Btn {
+    &Link {
       font-size: 20px;
       line-height: 23px;
     }
@@ -126,12 +127,18 @@
     }
   }
 
-  .titleBtn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  .titleLink {
+    &:hover {
+      color: var(--orange);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
   }
 }
