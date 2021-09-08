@@ -29,9 +29,9 @@ function AppComponent() {
       {isMounted
       && (
         <BrowserRouter>
-          <Redirect from="/auth" to="/posts" />
-          <Redirect exact from="/" to="/posts" />
           <Switch>
+            <Redirect from="/auth" to="/posts" />
+            <Redirect exact from="/" to="/posts" />
             <Route path="/posts">
               <Layout>
                 <Header />
