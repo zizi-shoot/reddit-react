@@ -75,7 +75,7 @@ export function TextContent(props: ITextContentProps) {
               ? title
               : (
                 <Link
-                  to={`/posts/${id}/${title.split(' ').splice(0, 10).join('_')}`}
+                  to={encodeURI(`/posts/${id}/${title.split(' ').splice(0, 10).join('_')}`)}
                   className={styles.titleLink}
                 >
                   {title}

@@ -5,13 +5,14 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Layout } from './shared/Layout';
 import { Header } from './shared/Header';
 import { Content } from './shared/Content';
 import { CardsListContainer } from './shared/Content/CardsListContainer';
 import { rootReducer } from './store/reducer';
 import { Post } from './shared/Content/Post';
+import { Page404 } from './shared/Page404';
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
@@ -19,7 +20,6 @@ const store = createStore(rootReducer, composeWithDevTools(
 
 function AppComponent() {
   const [isMounted, setIsMounted] = useState(false);
-
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -29,15 +29,24 @@ function AppComponent() {
       {isMounted
       && (
         <BrowserRouter>
-          <Layout>
-            <Header />
-            <Content>
-              <CardsListContainer />
-              <Route path="/posts/:id">
-                <Post />
-              </Route>
-            </Content>
-          </Layout>
+          <Redirect from="/auth" to="/posts" />
+          <Redirect exact from="/" to="/posts" />
+          <Switch>
+            <Route path="/posts">
+              <Layout>
+                <Header />
+                <Content>
+                  <CardsListContainer />
+                  <Route path="/posts/:id">
+                    <Post />
+                  </Route>
+                </Content>
+              </Layout>
+            </Route>
+            <Route path="*">
+              <Page404 />
+            </Route>
+          </Switch>
         </BrowserRouter>
       )}
     </Provider>

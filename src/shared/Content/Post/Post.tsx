@@ -101,7 +101,7 @@ export function Post() {
   const history = useHistory();
 
   function onClose() {
-    history.push('/');
+    history.push('/posts');
     modal?.classList.toggle('post--hidden');
     if (modal) enableBodyScroll(modal);
     clearAllBodyScrollLocks();
