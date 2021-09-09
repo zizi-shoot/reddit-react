@@ -13,7 +13,7 @@ interface IAccountProps {
 
 export function Account({ avatarSrc, username, loading, extraClass }: IAccountProps) {
   const classes = classNames(extraClass, styles.container);
-  const SERVER = process.env.SERVER || 'http://localhost';
+  const SERVER = process.env.SERVER !== 'undefined' ? process.env.SERVER : 'http://localhost:3000';
 
   function onClick() {
     localStorage.removeItem('token');

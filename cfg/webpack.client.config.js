@@ -18,7 +18,7 @@ const { NODE_ENV } = process.env;
 const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
 const GLOBAL_SCSS_REGEXP = /\.global\.scss$/;
-const SERVER = process.env.SERVER || 'http://localhost';
+const SERVER = process.env.SERVER !== 'undefined' ? process.env.SERVER : 'http://localhost';
 
 function setupDevtool() {
   if (IS_DEV) return 'inline-source-map';
@@ -33,10 +33,12 @@ module.exports = {
       'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom',
     },
   },
-  entry: [
-    path.resolve(__dirname, '../src/client/index.tsx'),
-    IS_DEV && `webpack-hot-middleware/client?path=${SERVER}/static/__webpack_hmr`,
-  ],
+  entry: IS_PROD
+    ? path.resolve(__dirname, '../src/client/index.tsx')
+    : [
+      path.resolve(__dirname, '../src/client/index.tsx'),
+      `webpack-hot-middleware/client?path=${SERVER}/static/__webpack_hmr`,
+    ],
   output: {
     path: path.resolve(__dirname, '../dist/client'),
     filename: 'client.js',
