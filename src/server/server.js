@@ -1,16 +1,25 @@
 import express from 'express';
 import ReactDOM from 'react-dom/server';
 import axios from 'axios';
+import compression from 'compression';
+import helmet from 'helmet';
 import indexTemplate from './indexTemplate';
 import { App } from '../App';
 
 const PORT = process.env.PORT || 3000;
 const SERVER = process.env.SERVER !== 'undefined' ? process.env.SERVER : 'http://localhost';
 const REDIRECT_URI = SERVER === 'http://localhost' ? `${SERVER}:${PORT}` : SERVER;
+const IS_DEV = process.env.NODE_ENV !== 'production';
 const app = express();
 
-app.use('/static', express.static('./dist/client'));
+if (IS_DEV) {
+  app.use(compression());
+  app.use(helmet({
+    contentSecurityPolicy: false,
+  }));
+}
 
+app.use('/static', express.static('./dist/client'));
 app.get('/auth', (req, res) => {
   axios.post(
     'https://www.reddit.com/api/v1/access_token',
@@ -21,7 +30,6 @@ app.get('/auth', (req, res) => {
     },
   )
     .then(({ data }) => {
-      console.log(data);
       res.send(
         indexTemplate(ReactDOM.renderToString(App()), data.access_token),
       );
