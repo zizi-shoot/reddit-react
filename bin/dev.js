@@ -2,9 +2,9 @@ const webpack = require('webpack');
 const express = require('express');
 const nodemon = require('nodemon');
 const path = require('path');
-const [webpackClientConfig, webpackServerConfig] = require('../webpack.config');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const [webpackClientConfig, webpackServerConfig] = require('../webpack.config');
 
 const hmrServer = express();
 const clientCompiler = webpack(webpackClientConfig);

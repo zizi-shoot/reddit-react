@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=production CLIENT_ID=YAOA-YOSQoHH-xEiwsn6kw SECRET=FPSO62A1ECd0XVrohYuSY1vMQdp_SA SERVER=https://reddit-react-clone.herokuapp.com webpack",
     "dev": "cross-env NODE_ENV=development CLIENT_ID=YY_fBrjgcncWxA SECRET=jEEpnVuu-_hykE-H65xxdjXnyNPLSg node ./bin/dev.js",
-    "start": "cross-env CLIENT_ID=YAOA-YOSQoHH-xEiwsn6kw SECRET=FPSO62A1ECd0XVrohYuSY1vMQdp_SA node ./dist/server/server.js"
+    "start": "cross-env CLIENT_ID=YAOA-YOSQoHH-xEiwsn6kw SECRET=FPSO62A1ECd0XVrohYuSY1vMQdp_SA SERVER=https://reddit-react-clone.herokuapp.com node ./dist/server/server.js"
   },
   "repository": {
     "type": "git",

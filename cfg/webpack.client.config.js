@@ -10,6 +10,7 @@ const { NODE_ENV } = process.env;
 const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
 const GLOBAL_SCSS_REGEXP = /\.global\.scss$/;
+const SERVER = process.env.SERVER || 'http://localhost';
 
 function setupDevtool() {
   if (IS_DEV) return 'inline-source-map';
@@ -26,7 +27,7 @@ module.exports = {
   },
   entry: [
     path.resolve(__dirname, '../src/client/index.tsx'),
-    'webpack-hot-middleware/client?path=https://reddit-react-clone.herokuapp.com/static/__webpack_hmr',
+    `webpack-hot-middleware/client?path=${SERVER}/static/__webpack_hmr`,
   ],
   output: {
     path: path.resolve(__dirname, '../dist/client'),
