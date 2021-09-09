@@ -4,7 +4,15 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MinCssExtractPlugin = require('mini-css-extract-plugin');
 
 const DEV_PLUGINS = [new HotModuleReplacementPlugin()];
-const COMMON_PLUGINS = [new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` }), new CleanWebpackPlugin(), new MinCssExtractPlugin()];
+const COMMON_PLUGINS = [
+  new DefinePlugin({
+    'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'`,
+    'process.env.SERVER': `'${process.env.SERVER}'`,
+    'process.env.SECRET': `'${process.env.SECRET}'`,
+  }),
+  new CleanWebpackPlugin(),
+  new MinCssExtractPlugin(),
+];
 
 const { NODE_ENV } = process.env;
 const IS_DEV = NODE_ENV === 'development';
