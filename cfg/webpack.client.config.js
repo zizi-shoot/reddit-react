@@ -26,7 +26,7 @@ module.exports = {
   },
   entry: [
     path.resolve(__dirname, '../src/client/index.tsx'),
-    'webpack-hot-middleware/client?path=http://localhost:3001/static/__webpack_hmr',
+    'webpack-hot-middleware/client?path=https://reddit-react-clone.herokuapp.com/static/__webpack_hmr',
   ],
   output: {
     path: path.resolve(__dirname, '../dist/client'),
