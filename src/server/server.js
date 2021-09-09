@@ -6,6 +6,7 @@ import { App } from '../App';
 
 const PORT = process.env.PORT || 3000;
 const SERVER = process.env.SERVER !== 'undefined' ? process.env.SERVER : 'http://localhost';
+const REDIRECT_URI = SERVER === 'http://localhost' ? `${SERVER}:${PORT}` : SERVER;
 const app = express();
 
 app.use('/static', express.static('./dist/client'));
@@ -13,14 +14,14 @@ app.use('/static', express.static('./dist/client'));
 app.get('/auth', (req, res) => {
   axios.post(
     'https://www.reddit.com/api/v1/access_token',
-    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${SERVER}${SERVER === 'http://localhost' ? ':3000' : null}/auth`,
+    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${REDIRECT_URI}/auth`,
     {
       auth: { username: process.env.CLIENT_ID, password: process.env.SECRET },
       headers: { 'Content-type': 'application/x-www-form-urlencoded' },
     },
   )
     .then(({ data }) => {
-      console.log(data.access_token);
+      console.log(data);
       res.send(
         indexTemplate(ReactDOM.renderToString(App()), data.access_token),
       );
