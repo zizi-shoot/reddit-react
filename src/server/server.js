@@ -9,10 +9,10 @@ import { App } from '../App';
 const PORT = process.env.PORT || 3000;
 const SERVER = process.env.SERVER !== 'undefined' ? process.env.SERVER : 'http://localhost';
 const REDIRECT_URI = SERVER === 'http://localhost' ? `${SERVER}:${PORT}` : SERVER;
-const IS_DEV = process.env.NODE_ENV !== 'production';
+const IS_PROD = process.env.NODE_ENV === 'production';
 const app = express();
 
-if (IS_DEV) {
+if (IS_PROD) {
   app.use(compression());
   app.use(helmet({
     contentSecurityPolicy: false,
