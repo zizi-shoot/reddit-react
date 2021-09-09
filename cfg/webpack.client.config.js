@@ -35,7 +35,7 @@ module.exports = {
   },
   entry: [
     path.resolve(__dirname, '../src/client/index.tsx'),
-    `webpack-hot-middleware/client?path=${SERVER}/static/__webpack_hmr`,
+    IS_DEV && `webpack-hot-middleware/client?path=${SERVER}/static/__webpack_hmr`,
   ],
   output: {
     path: path.resolve(__dirname, '../dist/client'),

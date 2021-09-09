@@ -21,7 +21,11 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` }),
+    new DefinePlugin({
+      'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'`,
+      'process.env.SERVER': `'${process.env.SERVER}'`,
+      'process.env.SECRET': `'${process.env.SECRET}'`,
+    }),
   ],
   watchOptions: {
     ignored: /dist/,
