@@ -21,7 +21,6 @@
   "homepage": "https://github.com/zizi-shoot/reddit-react#readme",
   "devDependencies": {
     "@types/react-router-dom": "^5.1.8",
-    "axios": "^0.21.1",
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.1",
     "css-loader": "^6.2.0",
@@ -57,6 +56,7 @@
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
+    "axios": "^0.21.1",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
