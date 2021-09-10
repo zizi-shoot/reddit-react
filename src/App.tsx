@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { atom, RecoilRoot } from 'recoil';
 import { Layout } from './shared/Layout';
 import { Header } from './shared/Header';
 import { Content } from './shared/Content';
@@ -17,6 +18,11 @@ import { Page404 } from './shared/Page404';
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
 ));
+
+export const commentState = atom({
+  key: 'commentState',
+  default: '',
+});
 
 function AppComponent() {
   const [isMounted, setIsMounted] = useState(false);
@@ -37,9 +43,11 @@ function AppComponent() {
                 <Header />
                 <Content>
                   <CardsListContainer />
-                  <Route path="/posts/:id">
-                    <Post />
-                  </Route>
+                  <RecoilRoot>
+                    <Route path="/posts/:id">
+                      <Post />
+                    </Route>
+                  </RecoilRoot>
                 </Content>
               </Layout>
             </Route>

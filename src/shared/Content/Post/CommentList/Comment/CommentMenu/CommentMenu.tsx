@@ -1,20 +1,20 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSetRecoilState } from 'recoil';
 import styles from './commentmenu.scss';
 import { EIcons, Icon } from '../../../../../Icon';
-import { updateComment } from '../../../../../../store/actions';
+import { commentState } from '../../../../../../App';
 
 interface ICommentMenuProps {
   author: string,
 }
 
 export function CommentMenu({ author }: ICommentMenuProps) {
-  const dispatch = useDispatch();
+  const setCommentValue = useSetRecoilState(commentState);
 
   return (
     <ul className={styles.list}>
       <li className={styles.item}>
-        <button type="button" onClick={() => dispatch(updateComment(`${author}, `))}>
+        <button type="button" onClick={() => setCommentValue(`${author}, `)}>
           <Icon name={EIcons.comments} size={14} mobileSize={12} />
           Ответить
         </button>

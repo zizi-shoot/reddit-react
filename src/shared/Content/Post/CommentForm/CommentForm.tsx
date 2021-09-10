@@ -2,14 +2,13 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import classNames from 'classnames';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRecoilState } from 'recoil';
 import styles from './commentform.scss';
 import actionsStyles from './FormActions/formactions.scss';
 import { EIcons, Icon } from '../../../Icon';
 import { FormActions } from './FormActions';
 import { generateId } from '../../../../utils/react/generateRandomIndex';
-import { updateComment } from '../../../../store/actions';
-import { IRootState } from '../../../../types';
+import { commentState } from '../../../../App';
 
 const items = [
   {
@@ -132,20 +131,20 @@ interface IForm {
 
 export function CommentForm({ extraClass }: ICommentFormProps) {
   const classes = classNames(styles.container, extraClass);
-  const value = useSelector<IRootState, string>((state) => state.comment);
-  const dispatch = useDispatch();
-  const { register, handleSubmit, setValue, setFocus, formState: { errors } } = useForm<IForm>();
+  const [value, setValue] = useRecoilState(commentState);
+  const { register, handleSubmit, setFocus, formState: { errors } } = useForm<IForm>();
+
   const onSubmit: SubmitHandler<IForm> = () => {
     alert('Комментарий добавлен');
-    dispatch(updateComment(''));
+    setValue('');
   };
 
-  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    dispatch(updateComment(event.target.value));
-  }
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(event.target.value);
+  };
 
   useEffect(() => {
-    setValue('comment', value);
+    setValue(value);
     setFocus('comment');
   }, [value, setFocus]);
 
