@@ -1,6 +1,6 @@
 # Reddit-react
 
-React learning project
+React learning project - https://reddit-react-clone.herokuapp.com/
 
 ## Usage
 
